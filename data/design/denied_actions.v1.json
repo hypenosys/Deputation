@@ -1,0 +1,119 @@
+{
+  "schema": "deputation.denied_actions.v1",
+  "case_id": "EXP-0042",
+  "purpose": "Host reference fixtures; denial must preserve authoritative state including time/permissions/knowledge/trust",
+  "fixtures": [
+    {
+      "id": "basis_absent",
+      "action": "request_permit",
+      "expected_code": "MISSING_CASE_BASIS",
+      "state": {
+        "minute": 19
+      }
+    },
+    {
+      "id": "wrong_room",
+      "action": "request_permit",
+      "expected_code": "WRONG_ROOM",
+      "state": {
+        "room": "COURTYARD",
+        "knowledge": [
+          "CASE_BASIS"
+        ]
+      }
+    },
+    {
+      "id": "secretary_absent",
+      "action": "request_permit",
+      "expected_code": "ACTOR_UNAVAILABLE",
+      "state": {
+        "knowledge": [
+          "CASE_BASIS"
+        ],
+        "available_actors": [
+          "ARCHIVIST"
+        ]
+      }
+    },
+    {
+      "id": "wrong_issuer",
+      "action": "request_permit",
+      "expected_code": "ACTOR_NOT_AUTHORIZED",
+      "state": {
+        "knowledge": [
+          "CASE_BASIS"
+        ]
+      },
+      "actor": "ARCHIVIST"
+    },
+    {
+      "id": "expired",
+      "action": "request_permit",
+      "expected_code": "DEADLINE_EXPIRED",
+      "state": {
+        "minute": 30,
+        "knowledge": [
+          "CASE_BASIS"
+        ]
+      }
+    },
+    {
+      "id": "already_permitted",
+      "action": "request_permit",
+      "expected_code": "PERMISSION_ALREADY_GRANTED",
+      "state": {
+        "permissions": [
+          "ARCHIVE_CASE_0042"
+        ],
+        "knowledge": [
+          "CASE_BASIS"
+        ]
+      }
+    },
+    {
+      "id": "archive_no_permission",
+      "action": "read_archive",
+      "expected_code": "MISSING_CASE_PERMISSION",
+      "state": {
+        "room": "ARCHIVE",
+        "stage": "archive_review"
+      }
+    },
+    {
+      "id": "archive_bad_stage",
+      "action": "read_archive",
+      "expected_code": "INVALID_CASE_STAGE",
+      "state": {
+        "room": "ARCHIVE",
+        "stage": "registered",
+        "permissions": [
+          "ARCHIVE_CASE_0042"
+        ]
+      }
+    },
+    {
+      "id": "validate_no_history",
+      "action": "validate_case",
+      "expected_code": "MISSING_HISTORY",
+      "state": {
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "knowledge": [
+          "READY"
+        ]
+      }
+    },
+    {
+      "id": "validate_not_ready",
+      "action": "validate_case",
+      "expected_code": "MISSING_READY",
+      "state": {
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "knowledge": [
+          "HISTORY"
+        ]
+      }
+    }
+  ]
+}
