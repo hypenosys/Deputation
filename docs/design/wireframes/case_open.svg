@@ -13,7 +13,7 @@
 <text x="38" y="474" font-family="DejaVu Sans Mono,Liberation Mono,monospace" font-size="16" font-weight="400" fill="#F2D889">FASE</text>
 <text x="38" y="501" font-family="DejaVu Sans Mono,Liberation Mono,monospace" font-size="19" font-weight="400" fill="#F8F2E2">REGISTRADO</text>
 <rect x="263" y="84" width="663" height="474" fill="#EEE5CE" stroke="#D8CAA9" stroke-width="2"/>
-<rect x="938" y="84" width="324" height="474" fill="#D8CAA9" stroke="#354243" stroke-width="2"/>
+<rect x="938" y="84" width="324" height="474" fill="#EEE5CE" stroke="#354243" stroke-width="2"/>
 <text x="960" y="118" font-family="DejaVu Sans Mono,Liberation Mono,monospace" font-size="15" font-weight="400" fill="#55615A">RESOLUCIÓN / ÚLTIMO ACTO</text>
 <text x="960" y="169" font-family="DejaVu Sans Mono,Liberation Mono,monospace" font-size="23" font-weight="700" fill="#8B2734">NO DISPONIBLE</text>
 <text x="960" y="206" font-family="DejaVu Sans Mono,Liberation Mono,monospace" font-size="14" font-weight="400" fill="#172527">REF: INVALID_CASE_STAGE</text>
