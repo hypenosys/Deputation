@@ -25,3 +25,10 @@ Changes in this repository are recorded without treating planned features as shi
 - Added 6-cycle winning and 3-cycle losing authored input traces in canonical three-room world with deterministic host replay, per-action SHA-256 and visible reason-code projection.
 - Added blind paper-playtest protocol, speculative 12–20 real-minute baseline, C64 memory/cycle planning (unmeasured), future Godot debugger contract and host regression/CI steps.
 - No claim that simulated ghosts are human playtests, native C64 execution or a complete production gameplay implementation.
+
+### Institutional art direction and Godot case-desk proof of concept
+- Added a 16-color original host palette with CI contrast verification, original administrative desk concept vector, and three editable institutional SVG wireframes.
+- Added original EXP-0042 character copy, actors/motivations and state-conditioned reason-code language.
+- Added a Godot 4.x desk source project with three screen layouts, scoped case actions, persistence of denials, terminal cases and a muteable procedural typewriter/paper/stamp/clock sound system.
+- CI validates copy, SVG and text pairings, boots the Godot scene under a pinned official editor and tests end states and presentation-only toggles in actual GDScript.
+- Still **no claim** of C64 port, measured FPS, successful blind human playtest or exact Python↔Godot parity.
