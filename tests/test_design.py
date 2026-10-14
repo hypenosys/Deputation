@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.validate_design import (  # noqa: E402
-    DesignError, load, validate_feedback, validate_social, validate_scope,
+    DesignError, load, validate_feedback, validate_denied_fixtures,\n    validate_social, validate_scope,
     validate_prose,
 )
 
@@ -18,7 +18,7 @@ class NarrativeDesignContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.feedback = load("data/design/feedback_catalog.json")
-        cls.social = load("data/mechanics/social_dynamics.json")
+        cls.social = load("data/mechanics/social_dynamics.json")\n        cls.denied_fixtures = load("data/design/denied_actions.v1.json")
         cls.scope = load("data/design/m1_scope.json")
         cls.catalog = load("data/mechanics/extraction.v1.json")
 
@@ -44,6 +44,15 @@ class NarrativeDesignContractTests(unittest.TestCase):
         ]
         with self.assertRaises(DesignError):
             validate_feedback(data)
+
+    def test_denied_fixtures_reference_codes(self):
+        self.assertEqual(validate_denied_fixtures(self.denied_fixtures, self.feedback), 10)
+
+    def test_denied_fixture_without_feedback_rejected(self):
+        data = copy.deepcopy(self.denied_fixtures)
+        data["fixtures"][0]["expected_code"] = "FABRICATED_REASON"
+        with self.assertRaises(DesignError):
+            validate_denied_fixtures(data, self.feedback)
 
     def test_all_25_social_effects(self):
         self.assertEqual(validate_social(self.social), 25)
