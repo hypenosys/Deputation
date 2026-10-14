@@ -103,6 +103,37 @@ def validate_scope(data: dict, catalog: dict) -> int:
     return len(data["M1"])
 
 
+
+def validate_denied_fixtures(data: dict, feedback: dict) -> int:
+    require(data.get("schema") == "deputation.denied_actions.v1", "Denial fixtures schema invalid")
+    require(data.get("case_id") == "EXP-0042", "Denied fixtures wrong case")
+    fixtures = data.get("fixtures")
+    require(isinstance(fixtures, list) and len(fixtures) >= 10, "Denied fixtures missing")
+    reference = {
+        (item["action"], item["code"]) for item in feedback["denials"]
+        if item["status"] == "reference"
+    }
+    seen = set()
+    for item in fixtures:
+        name, action, code = item.get("id"), item.get("action"), item.get("expected_code")
+        require(isinstance(name, str) and name.strip() and name not in seen,
+                "Duplicate or invalid denial fixture ID")
+        seen.add(name)
+        require(action in {"request_permit", "read_archive", "validate_case"},
+                f"{name}: unknown fixture action")
+        require((action, code) in reference or ("*", code) in reference,
+                f"{name}: no cataloged reference feedback")
+        state = item.get("state")
+        require(isinstance(state, dict), f"{name}: missing authoritative state")
+        require(type(state.get("minute", 0)) is int and state.get("minute", 0) >= 0,
+                f"{name}: invalid minute")
+        for key in ("knowledge", "permissions", "available_actors"):
+            if key in state:
+                require(isinstance(state[key], list)
+                        and all(isinstance(x, str) for x in state[key]),
+                        f"{name}: malformed {key}")
+    return len(fixtures)
+
 def validate_prose(root: Path = ROOT) -> tuple[int, int]:
     arc = (root / "docs/design/EXP-0042_case_arc.md").read_text(encoding="utf-8")
     moment = (root / "docs/design/moment_to_moment.md").read_text(encoding="utf-8")
@@ -118,6 +149,8 @@ def validate_prose(root: Path = ROOT) -> tuple[int, int]:
 def main() -> int:
     feedback = validate_feedback(load("data/design/feedback_catalog.json"))
     social = validate_social(load("data/mechanics/social_dynamics.json"))
+    denied_fixtures = validate_denied_fixtures(load("data/design/denied_actions.v1.json"),
+                                               load("data/design/feedback_catalog.json"))
     scope = validate_scope(load("data/design/m1_scope.json"),
                            load("data/mechanics/extraction.v1.json"))
     arc_words, loop_words = validate_prose()
@@ -126,7 +159,8 @@ def main() -> int:
             world["case"]["deadline_minute"] == 30,
             "Narrative case deadline contradicts canonical world")
     print(f"DESIGN PASS: {feedback} feedback reasons, {social} trust cells, "
-          f"{scope} M1 mechanics, arc {arc_words} words, loop {loop_words} words")
+          f"{scope} M1 mechanics, {denied_fixtures} negative fixtures, "
+          f"arc {arc_words} words, loop {loop_words} words")
     return 0
 
 
