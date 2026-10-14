@@ -8,16 +8,16 @@
 
 - **Verbo:** **acreditar**, mediante investigar → justificar → solicitar → comprobar → validar.
 - **Unidad primaria:** **expediente cerrado en una sesión**; no se modela un día laboral entero en M1.
-- **Escenario:** Courtyard (1) ↔ Registry (2) ↔ Archive (3), \`EXP0042\` con reloj ficticio de m0–30.
+- **Escenario:** Courtyard (1) ↔ Registry (2) ↔ Archive (3), `EXP0042` con reloj ficticio de m0–30.
 - **Duración esperada:** **12–20 minutos reales por primera sesión de una única misión**, hipótesis a medir. Cada ciclo pretende durar ~2–3 minutos reales y la traza ganadora tiene 6 ciclos; los 30 minutos **son simulados**, no un temporizador de 30 minutos del usuario.
 - **Presentación objetivo:** PETSCII, tres cámaras propuestas (isométrica/raycast/wireframe) sobre el mismo estado; no condicionan la progresión.
 - **Audiencia:** personas que disfrutan la investigación, los dilemas institucionales y descubrir reglas, sin exigir conocimientos administrativos reales.
 
 ## Estado del jugador, ramas y finales
 
-**Variables autoritativas M1 propuestas:** sala (3), minuto entero (0–30 y posible expiración), fase (\`registered\`, \`archive_review\`, \`validated\`), permiso \`ARCHIVE_CASE_0042\` (sí/no), conocimiento \`CASE_BASIS\`, \`HISTORY\`, \`REVIEW\`, \`READY\` (bits), objetivo visible y resultado. Confianza y social memory se reservan para M2: *no sumarlas a la explosión de estados como si ya existieran*.
+**Variables autoritativas M1 propuestas:** sala (3), minuto entero (0–30 y posible expiración), fase (`registered`, `archive_review`, `validated`), permiso `ARCHIVE_CASE_0042` (sí/no), conocimiento `CASE_BASIS`, `HISTORY`, `REVIEW`, `READY` (bits), objetivo visible y resultado. Confianza y social memory se reservan para M2: *no sumarlas a la explosión de estados como si ya existieran*.
 
-No declarar «N vidas» ni **un número único de combinaciones**: producto cartesiano sin restricciones no representa estados alcanzables y los tiempos/acciones inválidos producen muchos duplicados. Definir **tres clases macroscópicas de resultado** en el diseño: \`validated\` (implementable en oráculo), \`expired\` (implementable en oráculo) y \`under_review\` (reservado para revisión formal M2, **no** implementado). Dejar separadas victoria administrativa y justicia moral; añadir finales ramificados solo si guardas y hechos reproducibles los sustentan.
+No declarar «N vidas» ni **un número único de combinaciones**: producto cartesiano sin restricciones no representa estados alcanzables y los tiempos/acciones inválidos producen muchos duplicados. Definir **tres clases macroscópicas de resultado** en el diseño: `validated` (implementable en oráculo), `expired` (implementable en oráculo) y `under_review` (reservado para revisión formal M2, **no** implementado). Dejar separadas victoria administrativa y justicia moral; añadir finales ramificados solo si guardas y hechos reproducibles los sustentan.
 
 ## Replay value
 
@@ -31,7 +31,7 @@ No declarar «N vidas» ni **un número único de combinaciones**: producto cart
 2. La consulta de estado y la cámara son observaciones, nunca acciones con coste.
 3. El permiso para EXP-0042 no es entrada a todo Archive ni equivale a conocimiento verificado.
 4. La victoria solo ocurre mediante una validación **explícita** en la sala correcta y dentro del plazo.
-5. \`READY\` solo procede del hito autorizado m27; el director no lo fabrica.
+5. `READY` solo procede del hito autorizado m27; el director no lo fabrica.
 6. Mantener 15 observaciones para M1, 23 para M2 y 7 para M3, preservando todos los IDs del archivo.
 7. No aprobar la calidad jugable con pruebas puramente de esquema. Requiere protocolo ciego de papel y luego pruebas del ejecutable.
 
