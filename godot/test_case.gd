@@ -55,6 +55,11 @@ func _exercise() -> void:
 	desk._on_layout(2)
 	desk._on_layout(0)
 	if not _check(desk.model.snapshot() == current, "layout switching must not mutate world"): return
+	var prior_enabled: bool = desk.audio.enabled
+	desk._toggle_ambient()
+	if not _check(desk.audio.enabled != prior_enabled, "audio preferences toggle"): return
+	if not _check(desk.model.snapshot() == current, "audio toggle must not mutate world"): return
+	desk.audio.cue("paper") # Dummy headless playback must stay safe.
 	var count: int = desk.find_children("*", "Button", true, false).size()
 	if not _check(count >= 13, "three tabs and ten action controls must render"): return
 	print("GODOT_CASE_PASS: win=m28, loss=m30, denials idempotent, 3 view switches read-only, buttons=" + str(count))
