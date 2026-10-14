@@ -45,7 +45,7 @@ def _decision(state: CaseState, code: str, actor: str, next_action: str,
         actor=actor,
         next_action=next_action,
         state=state if new_state is None else new_state,
-        remaining_minutes=max(0, DEADLINE_MINUTE - state.minute),
+        remaining_minutes=max(0, DEADLINE_MINUTE - (state if new_state is None else new_state).minute),
     )
 
 
