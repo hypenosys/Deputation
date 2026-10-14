@@ -100,6 +100,26 @@ class DeniedPermitIdempotenceTests(unittest.TestCase):
                           knowledge=frozenset({"HISTORY", "READY"}))
         self.assert_denied_unchanged(state, "validate_case", "DEADLINE_EXPIRED")
 
+    def test_replayable_json_denial_fixtures(self):
+        import json
+        fixture_file = ROOT / "data/design/denied_actions.v1.json"
+        fixture = json.loads(fixture_file.read_text(encoding="utf-8"))
+        self.assertEqual(fixture["schema"], "deputation.denied_actions.v1")
+        self.assertEqual(len(fixture["fixtures"]), 10)
+        for spec in fixture["fixtures"]:
+            with self.subTest(spec["id"]):
+                state_data = dict(spec["state"])
+                for key in ("permissions", "knowledge", "available_actors"):
+                    if key in state_data:
+                        state_data[key] = frozenset(state_data[key])
+                if "trust" in state_data:
+                    state_data["trust"] = tuple(state_data["trust"])
+                state = CaseState(**state_data)
+                kwargs = {"actor": spec["actor"]} if "actor" in spec else {}
+                self.assert_denied_unchanged(
+                    state, spec["action"], spec["expected_code"], **kwargs
+                )
+
     def test_unknown_action_does_not_write(self):
         state = CaseState()
         with self.assertRaises(ValueError):
