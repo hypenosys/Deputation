@@ -43,3 +43,5 @@ jobs:
         run: ./Godot_v4.6.3-stable_linux.x86_64 --headless --path . --editor --quit
       - name: Launch interactive desk headless for 5 frames
         run: ./Godot_v4.6.3-stable_linux.x86_64 --headless --path . --quit-after 5
+      - name: Run actual Godot GDScript game logic and UI regression
+        run: ./Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://godot/test_case.gd
