@@ -14,7 +14,7 @@ THE DEPUTATION is about **investigating and accrediting a contradiction** under 
 - [Canonical fictional three-room world](data/world/vertical_slice.v1.json).
 - [Canonical GAME LOOP](docs/GAME_LOOP.md), [ACTION MATRIX](docs/behavior/ACTION_MATRIX.md), [player agency](docs/PLAYER_AGENCY.md), [hybrid narrative engine](docs/NARRATIVE_ENGINE.md).
 - [Blind paper-playtest protocol](docs/PLAYTESTING_PROTOCOL.md), [C64 constraints](docs/CONSTRAINTS.md), [design baseline](docs/DESIGN_BASELINE.md) and [future state debugger](docs/STATE_DEBUGGER.md).
-- [Six-cycle winning ghost](data/world/simulation_trace.json), [losing counterfactual](data/world/simulation_trace_failure.json) and [pure trace runner](tools/simulate_trace.py).
+- [Six-cycle winning ghost](data/world/simulation_trace.json), [losing counterfactual](data/world/simulation_trace_failure.json), [CI-observed action-by-action walkthrough](docs/behavior/TRACE_WALKTHROUGH.md) and [pure trace runner](tools/simulate_trace.py).
 - [Architecture](docs/architecture.md), [development roadmap](docs/roadmap.md) and [contribution requirements](CONTRIBUTING.md).
 - [EXP-0042 case arc](docs/design/EXP-0042_case_arc.md), [2–3 minute loop](docs/design/moment_to_moment.md), [denial feedback](docs/design/denial_feedback.md), [trust dynamics](docs/design/social_dynamics.md), [pacing](docs/design/case_pacing.md), [M1 scope (15/45)](docs/design/M1_scope.md).
 - Python standard-library checks and CI, **not** a claim of executable 45-mechanic integration.
