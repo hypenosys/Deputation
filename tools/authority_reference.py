@@ -1,7 +1,7 @@
 """EXP-0042 authorization *reference contract*, not the playable M1 runtime.
 
 Frozen state, no side effects for denials. Feedback is a separate projection.
-This intentionally does not simulate navigation, queues, trust or C64 memory.
+This intentionally does not simulate navigation, time-triggered stage changes,\nqueues, trust or C64 memory. Native ABBI enters archive_review at m10,\nand validates from ARCHIVE; the host fixture caller supplies this external state.
 """
 from __future__ import annotations
 
@@ -65,7 +65,7 @@ def evaluate(state: CaseState, action: str, *, actor: str | None = None) -> Deci
     expected_room, responsible = {
         "request_permit": ("REGISTRY", "SECRETARY"),
         "read_archive": ("ARCHIVE", "ARCHIVIST"),
-        "validate_case": ("REGISTRY", "CASE_OFFICE"),
+        "validate_case": ("ARCHIVE", "CASE_OFFICE"),
     }[action]
     operator = actor or responsible
     if state.minute >= DEADLINE_MINUTE:
@@ -89,9 +89,9 @@ def evaluate(state: CaseState, action: str, *, actor: str | None = None) -> Deci
     if action == "read_archive":
         if CASE_PERMISSION not in state.permissions:
             return _decision(state, "MISSING_CASE_PERMISSION", operator, "request_permit")
-        if state.stage != "registered":
-            return _decision(state, "INVALID_CASE_STAGE", operator, "inspect_case_status")
-        updated = replace(state, minute=state.minute + 1, stage="archive_review",
+        if state.stage != "archive_review":
+            return _decision(state, "INVALID_CASE_STAGE", operator, "await_archive_review_stage")
+        updated = replace(state, minute=state.minute + 1,
                           knowledge=state.knowledge | {"HISTORY"})
         return _decision(state, "ARCHIVE_READ", operator, "validate_case", updated)
 
