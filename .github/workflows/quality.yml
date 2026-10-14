@@ -15,5 +15,7 @@ jobs:
           python-version: '3.12'
       - name: Validate mechanics and world
         run: python tools/validate_mechanics.py
+      - name: Validate narrative design and denial contracts
+        run: python tools/validate_design.py
       - name: Run regression suite
         run: python -m unittest discover -s tests -v
