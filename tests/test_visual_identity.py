@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.validate_visual import (  # noqa: E402
     PALETTE, CONTENT, WIREFRAMES, VisualContractError,
-    validate_concept,
+    validate_concept, validate_petscii,
     validate_copy, validate_palette, validate_wireframes, contrast,
 )
 
@@ -41,6 +41,9 @@ class VisualContractTests(unittest.TestCase):
 
     def test_original_concept_art_is_parseable(self):
         self.assertTrue(validate_concept())
+
+    def test_exact_petscii_40x25_screens(self):
+        self.assertEqual(validate_petscii(), 3)
 
     def test_narrative_copy_has_actors_and_results(self):
         data = validate_copy(self.copy)
