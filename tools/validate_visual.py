@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PALETTE = ROOT / "data/design/visual_palette.v1.json"
 CONTENT = ROOT / "data/design/narrative_content.v1.json"
 WIREFRAMES = ROOT / "docs/design/wireframes"
+CONCEPT = ROOT / "docs/design/concepts/institutional_desk.svg"
 HEX = re.compile(r"#[0-9A-Fa-f]{6}\Z")
 EXPECTED = {"case_open.svg", "task_list.svg", "administrative_view.svg"}
 SVG_NS = "{http://www.w3.org/2000/svg}"
@@ -102,13 +103,24 @@ def validate_wireframes(directory: Path = WIREFRAMES) -> int:
     return len(EXPECTED)
 
 
+def validate_concept(path: Path = CONCEPT) -> bool:
+    root = ET.parse(path).getroot()
+    require(root.tag == SVG_NS + "svg", "Concept art must be valid SVG")
+    require(root.attrib.get("viewBox") == "0 0 1280 720", "Concept art wrong canvas")
+    require(len(list(root.iter(SVG_NS + "rect"))) >= 20, "Concept art is empty")
+    labels = " ".join(node.text or "" for node in root.iter() if node.tag == SVG_NS + "text")
+    require("DEPUTATION" in labels and "0042" in labels, "Concept lacks project identity")
+    return True
+
+
 def main() -> int:
     palette = validate_palette(json.loads(PALETTE.read_text(encoding="utf-8")))
     narrative = validate_copy(json.loads(CONTENT.read_text(encoding="utf-8")))
     wireframes = validate_wireframes()
+    concept = validate_concept()
     print(f"VISUAL PASS: {palette['colors']} colors, {palette['pairs']} accessible text pairs, "
           f"{narrative['actors']} actors, {narrative['results']} result texts, "
-          f"{wireframes} original SVG wireframes")
+          f"{wireframes} original SVG wireframes, concept_svg={concept}")
     return 0
 
 
