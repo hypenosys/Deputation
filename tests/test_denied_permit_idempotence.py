@@ -82,7 +82,8 @@ class DeniedPermitIdempotenceTests(unittest.TestCase):
         self.assert_denied_unchanged(state, "validate_case", "MISSING_HISTORY")
 
     def test_complete_reference_happy_path(self):
-        start = CaseState(minute=25, stage="archive_review",\n                          knowledge=frozenset({"CASE_BASIS", "READY"}))
+        start = CaseState(minute=25, stage="archive_review",
+                          knowledge=frozenset({"CASE_BASIS", "READY"}))
         granted = evaluate(start, "request_permit")
         self.assertTrue(granted.accepted)
         self.assertEqual(granted.state.minute, 26)
