@@ -1,7 +1,9 @@
 """EXP-0042 authorization *reference contract*, not the playable M1 runtime.
 
 Frozen state, no side effects for denials. Feedback is a separate projection.
-This intentionally does not simulate navigation, time-triggered stage changes,\nqueues, trust or C64 memory. Native ABBI enters archive_review at m10,\nand validates from ARCHIVE; the host fixture caller supplies this external state.
+This intentionally does not simulate navigation, time-triggered stage changes,
+queues, trust or C64 memory. Native ABBI enters archive_review at m10,
+and validates from ARCHIVE; the host fixture caller supplies this external state.
 """
 from __future__ import annotations
 
