@@ -7,10 +7,10 @@
 | Acto | Libre (decisión con efecto) | Cómplice (acepta coste moral) | Víctima (frontera externa) | Evidencia M1 |
 | --- | --- | --- | --- | --- |
 | Leer la carátula | Elegir qué prueba investigar y cuándo | Convertir una duda en mero trámite sin contrastar | No acceder sin visitar Registry | Lectura/coste probado en ghost runner |
-| Solicitar permiso | Preparar \`CASE_BASIS\` antes de pedirlo | Presentar solo la versión administrativa más favorable | Secretaría puede negar por reglas objetivas | Permit/denial host probado |
+| Solicitar permiso | Preparar `CASE_BASIS` antes de pedirlo | Presentar solo la versión administrativa más favorable | Secretaría puede negar por reglas objetivas | Permit/denial host probado |
 | Moverse | Elegir ruta y pagar tiempo | Abandonar una línea de prueba por rapidez | La topología solo permite Courtyard ↔ Registry ↔ Archive | Grafo y costes en ghost runner |
-| Leer Archive | Confrontar una afirmación con fuente | Ocultar una contradicción conocida (**M2**) | Sin \`ARCHIVE_CASE_0042\` no hay divulgación | \`HISTORY\` host con guardas |
-| Esperar | Decidir si sacrifica minutos a cambio de otro hito | Elegir comodidad mientras terceros esperan (**M2**) | m27 \`READY\` no se adelanta por voluntad | Espera y milestone host |
+| Leer Archive | Confrontar una afirmación con fuente | Ocultar una contradicción conocida (**M2**) | Sin `ARCHIVE_CASE_0042` no hay divulgación | `HISTORY` host con guardas |
+| Esperar | Decidir si sacrifica minutos a cambio de otro hito | Elegir comodidad mientras terceros esperan (**M2**) | m27 `READY` no se adelanta por voluntad | Espera y milestone host |
 | Validar | Actuar al contar con hechos suficientes | Dar por válida una omisión cuando existe otra vía (**M2**) | Sin fase/READY/plazo no puede forzar un sí | Guardas probadas en host |
 | Recurrir tras derrota | Investigar por qué perdió y repetir | Aceptar cierre administrativo injusto (**M2**) | Plazo de m30 irreversible en este expediente | Rechazo de deadline host |
 
