@@ -2,12 +2,14 @@ extends Control
 ## Institutional desk: three layouts, one case model, original procedural UI.
 ## Godot 4.x host-only prototype. No proprietary fonts/images required.
 const CaseState = preload("res://godot/case_state.gd")
+const ProceduralAudio = preload("res://godot/procedural_audio.gd")
 const LAYOUTS = ["EXPEDIENTE", "BANDEJA", "VENTANILLA"]
 
 var model: RefCounted
 var colors: Dictionary = {}
 var mono: Font
 var active_layout: int = 0
+var audio: Node
 
 func _ready() -> void:
 	model = CaseState.new()
@@ -21,6 +23,8 @@ func _ready() -> void:
 		"DejaVu Sans Mono", "Liberation Mono", "Noto Sans Mono", "Courier New"
 	])
 	mono = installed_font
+	audio = ProceduralAudio.new()
+	add_child(audio)
 	_redraw()
 
 func _ink(role: String) -> Color:
@@ -78,7 +82,13 @@ func _action_button(title: String, action: String, argument: Variant = null) -> 
 
 func _on_command(action: String, arg: Variant) -> void:
 	model.command(action, arg)
+	var info: Dictionary = model.explanation()
+	audio.cue(str(info.get("cue", "silent")))
 	_redraw()
+
+func _toggle_ambient() -> void:
+	audio.enabled = not audio.enabled
+	_redraw() # Audio preferences are presentation only.
 
 func _on_layout(index: int) -> void:
 	active_layout = index
@@ -90,6 +100,8 @@ func _section(title: String, text: String, container: VBoxContainer) -> void:
 
 func _redraw() -> void:
 	for node in get_children():
+		if node == audio:
+			continue
 		remove_child(node)
 		node.queue_free()
 	var bg: ColorRect = ColorRect.new()
@@ -139,6 +151,13 @@ func _redraw() -> void:
 			b.pressed.disconnect(connection["callable"])
 		b.pressed.connect(_on_layout.bind(index))
 		sidebar.add_child(b)
+	var sound_button: Button = _action_button(
+		"SONIDO: " + ("ACTIVADO" if audio.enabled else "SILENCIO"), "inspect_case_status"
+	)
+	for connection in sound_button.pressed.get_connections():
+		sound_button.pressed.disconnect(connection["callable"])
+	sound_button.pressed.connect(_toggle_ambient)
+	sidebar.add_child(sound_button)
 	sidebar.add_child(_caption("UBICACIÓN", 15, "pale_yellow"))
 	sidebar.add_child(_caption(model.room, 18, "pearl"))
 	sidebar.add_child(_caption("FASE", 15, "pale_yellow"))
@@ -200,7 +219,7 @@ func _redraw() -> void:
 	)
 	action_section.add_child(hito_button)
 	root.add_child(_caption(
-		"PRUEBA HOST GODOT · ESTADO ÚNICO · SIN GODOT/C64 PARIDAD CERTIFICADA · AUDIO: CUES DOCUMENTADOS",
+		"PRUEBA HOST GODOT · ESTADO ÚNICO · SIN GODOT/C64 PARIDAD CERTIFICADA · SONIDO PROCEDURAL LOCAL",
 		13, "paper_aged"
 	))
 
