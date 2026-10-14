@@ -16,6 +16,8 @@ THE DEPUTATION is about **investigating and accrediting a contradiction** under 
 - [Blind paper-playtest protocol](docs/PLAYTESTING_PROTOCOL.md), [C64 constraints](docs/CONSTRAINTS.md), [design baseline](docs/DESIGN_BASELINE.md) and [future state debugger](docs/STATE_DEBUGGER.md).
 - [Six-cycle winning ghost](data/world/simulation_trace.json), [losing counterfactual](data/world/simulation_trace_failure.json), [CI-observed action-by-action walkthrough](docs/behavior/TRACE_WALKTHROUGH.md) and [pure trace runner](tools/simulate_trace.py).
 - [Architecture](docs/architecture.md), [development roadmap](docs/roadmap.md) and [contribution requirements](CONTRIBUTING.md).
+- [Visual identity](docs/design/VISUAL_IDENTITY.md), [narrative voice](docs/design/NARRATIVE_VOICE.md), [UI conventions](docs/design/UI_CONVENTIONS.md), [three SVG wireframes](docs/design/wireframes/case_open.svg) and [original office concept art](docs/design/concepts/institutional_desk.svg).
+- [Godot playable desk source](godot/README.md): three UI layouts for EXP-0042 with permissions, time, evidence, persistent denials and synthesized audio placeholders; **host Godot prototype, not C64**.
 - [EXP-0042 case arc](docs/design/EXP-0042_case_arc.md), [2–3 minute loop](docs/design/moment_to_moment.md), [denial feedback](docs/design/denial_feedback.md), [trust dynamics](docs/design/social_dynamics.md), [pacing](docs/design/case_pacing.md), [M1 scope (15/45)](docs/design/M1_scope.md).
 - Python standard-library checks and CI, **not** a claim of executable 45-mechanic integration.
 
@@ -26,6 +28,7 @@ Requires Python 3.11+ (no external dependencies):
 ```bash
 python tools/validate_mechanics.py
 python tools/validate_design.py
+python tools/validate_visual.py
 python -m tools.simulate_trace --trace data/world/simulation_trace.json
 python -m tools.simulate_trace --trace data/world/simulation_trace_failure.json
 python -m unittest discover -s tests -v
