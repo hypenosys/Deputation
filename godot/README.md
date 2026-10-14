@@ -17,4 +17,4 @@ The desk shows three **zero-cost** layouts: expediente abierto, bandeja de tarea
 
 **Audio:** `godot/procedural_audio.gd` now synthesizes original low-volume stamp, paper, denial and ticking cues in memory; no sound file or license is imported. The ambient tick is based only on presentation-time and has an independent **SONIDO** toggle. See [audio cues](../docs/design/UI_CONVENTIONS.md). The acoustic result needs listening QA on a real device; headless verifies safe execution, not perceptual quality.
 
-**Target C64:** the 1280×720 Godot layout is not a 40×25 PETSCII screen. Refer to the original [wireframes](../docs/design/wireframes/) and [C64 constraints](../docs/CONSTRAINTS.md); implement and test a dedicated bank/glyph-aware renderer before claiming native portability.
+**Target C64:** the 1280×720 Godot layout is not a 40×25 PETSCII screen. Refer to the original [SVG wireframes](../docs/design/wireframes/), [40×25 layout fixtures](../docs/design/PETSCII_LAYOUT.md) and [C64 constraints](../docs/CONSTRAINTS.md); implement and test a dedicated bank/glyph-aware renderer before claiming native portability.
