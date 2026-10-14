@@ -22,6 +22,7 @@
 | Validar con ambos hechos | Archive, revisión, HISTORY + READY, m27 | \`S→S'\` \`validated\`, m28 | \`EXP-0042 VALIDATED\` |
 | Validar fuera de Archive | Sala no autorizada para acción | \`S→S\`, \`WRONG_ROOM\` | \`ARCHIVE REQUIRED\` |
 | Validar desde m30 | Plazo vencido | \`S→S\`, \`DEADLINE_EXPIRED\` | \`EXPIRED / REVIEW OUTCOME\` |
+| Intentar actuar tras validación | Caso `validated` | `S→S`, `CASE_ALREADY_VALIDATED` | `CASE CLOSED / VIEW RESULT` |
 | Consultar el estado | Cualquier sala | \`S→S\` (read-only) | \`ROOM / CASE / DEADLINE / NEXT\` |
 | Cambiar cámara | Cualquier sala | \`S→S\` (presentación pura) | Misma información, nueva composición |
 
