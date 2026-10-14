@@ -1,6 +1,6 @@
 # EXP-0042 — Walkthrough observado del replay host (NO playtest humano)
 
-**Evidencia:** [GitHub Actions #38589387641](https://github.com/hypenosys/Deputation/actions/runs/38589387641), ejecución Quality concluida con **success** para el código de la rama \`feature/gameplay-grammar-simulation-traces\` a fecha **2026-10-14**. Este resumen refleja lo que produjo **el oráculo Python**. No son sensaciones de un jugador, vídeo de Godot ni pantalla del C64.
+**Evidencia:** [GitHub Actions #38589387641](https://github.com/hypenosys/Deputation/actions/runs/38589387641), ejecución Quality concluida con **success** para el código de la rama `feature/gameplay-grammar-simulation-traces` a fecha **2026-10-14**. Este resumen refleja lo que produjo **el oráculo Python**. No son sensaciones de un jugador, vídeo de Godot ni pantalla del C64.
 
 ## Ruta ganadora — 6 ciclos, 20 acciones
 
@@ -27,7 +27,7 @@
 | C05.3 | Consultar estado | 27 | Archive | STATUS_VIEWED, sin coste |
 | C06.1 | Validar expediente | 28 | Archive | **CASE_VALIDATED** |
 
-**Terminal comprobado:** \`validated\` en m28. Hash canónico SHA-256 del último estado: \`3f2cffcf3f93ad93f052c5744052745c1c9fabf83d8be8a0aaa2efd4056b42b0\`.
+**Terminal comprobado:** `validated` en m28. Hash canónico SHA-256 del último estado: `3f2cffcf3f93ad93f052c5744052745c1c9fabf83d8be8a0aaa2efd4056b42b0`.
 
 ## Ruta perdedora — 3 ciclos, 9 acciones
 
@@ -43,7 +43,7 @@
 | L03.1 | Esperar 6 | 30 | Archive | WAITED; vence plazo |
 | L03.2 | Validar fuera del plazo | 30 | Archive | **DEADLINE_EXPIRED**, sin mutación |
 
-**Terminal comprobado:** \`expired\` en m30. Hash canónico SHA-256 del último estado: \`1695277900bbd9ee212cd0d5ba70d4e14ef85ec9088f1939a06092529b1eb521\`. El mensaje final corresponde a un código verificable y propone revisar el resultado; **no** concede un permiso ni reabre el expediente.
+**Terminal comprobado:** `expired` en m30. Hash canónico SHA-256 del último estado: `1695277900bbd9ee212cd0d5ba70d4e14ef85ec9088f1939a06092529b1eb521`. El mensaje final corresponde a un código verificable y propone revisar el resultado; **no** concede un permiso ni reabre el expediente.
 
 ## Lectura de diseño
 
@@ -51,7 +51,7 @@ La diferencia que importa **no** es un final animado: la primera partida convier
 
 **Gaps reconocidos:** el oráculo no mide tiempo real de 2–3 minutos por ciclo, no observa respuestas humanas y no simula m18 relación social ni la incidencia m20–24. Tampoco certifica FPS, memoria, coste por frame o PETSCII en hardware. Los informes detallados y hashes por paso se regeneran con:
 
-\`\`\`bash
+```bash
 python -m tools.simulate_trace --trace data/world/simulation_trace.json --format json
 python -m tools.simulate_trace --trace data/world/simulation_trace_failure.json --format json
-\`\`\`
+```
