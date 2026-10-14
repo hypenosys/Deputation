@@ -76,6 +76,18 @@ def denial(code: str, state: CaseState, before: CaseState) -> tuple[CaseState, s
 def perform(state: CaseState, action: dict, world: dict) -> tuple[CaseState, str]:
     """Return (new immutable state, outcome code). No rendering/UI side effects."""
     kind = action.get("type")
+    supported = {"move", "wait", "inspect_case_status", "read_case_file",
+                 "request_permit", "read_archive", "validate_case"}
+    if kind not in supported:
+        raise TraceError(f"unknown action: {kind!r}")
+    # A case is the unit of play: after closure only read-only inspection remains.
+    # An attempted command post-deadline does not spend *more* time.
+    if kind == "inspect_case_status":
+        return state, "STATUS_VIEWED"
+    if state.stage == "validated":
+        return denial("CASE_ALREADY_VALIDATED", state, state)
+    if state.minute >= DEADLINE_MINUTE:
+        return denial("DEADLINE_EXPIRED", state, state)
     if kind == "move":
         target = action.get("target")
         rooms = {r["symbol"]: r for r in world["rooms"]}
@@ -97,9 +109,6 @@ def perform(state: CaseState, action: dict, world: dict) -> tuple[CaseState, str
         if type(minutes) is not int or not 1 <= minutes <= 30:
             raise TraceError("explicit wait needs 1–30 simulated minutes")
         return advance_to(state, state.minute + minutes), "WAITED"
-
-    if kind == "inspect_case_status":
-        return state, "STATUS_VIEWED"
 
     if kind == "read_case_file":
         if state.minute >= DEADLINE_MINUTE:
