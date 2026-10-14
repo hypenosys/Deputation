@@ -16,6 +16,7 @@ PALETTE = ROOT / "data/design/visual_palette.v1.json"
 CONTENT = ROOT / "data/design/narrative_content.v1.json"
 WIREFRAMES = ROOT / "docs/design/wireframes"
 CONCEPT = ROOT / "docs/design/concepts/institutional_desk.svg"
+PETSCII = ROOT / "docs/design/petscii"
 HEX = re.compile(r"#[0-9A-Fa-f]{6}\Z")
 EXPECTED = {"case_open.svg", "task_list.svg", "administrative_view.svg"}
 SVG_NS = "{http://www.w3.org/2000/svg}"
@@ -113,14 +114,33 @@ def validate_concept(path: Path = CONCEPT) -> bool:
     return True
 
 
+def validate_petscii(directory: Path = PETSCII) -> int:
+    expected = {"case.txt", "tasks.txt", "counter.txt"}
+    actual = {file.name for file in directory.glob("*.txt")}
+    require(actual == expected, f"PETSCII mockup set changed: {actual}")
+    for name in expected:
+        content = (directory / name).read_text(encoding="ascii")
+        rows = content.splitlines()
+        require(len(rows) == 25, f"{name}: expected 25 rows, got {len(rows)}")
+        require(all(len(row) == 40 for row in rows), f"{name}: line beyond 40 chars")
+        for label in ("THE DEPUTATION", "EXP-0042", "CLOCK SIM", "ROOM:",
+                      "BY:", "WHY:", "NEXT:"):
+            require(label in content, f"{name}: mandatory visible feedback {label} absent")
+        require(rows[0] == "+" + "-" * 38 + "+" and rows[-1] == rows[0],
+                f"{name}: fixed frame changed")
+    return len(expected)
+
+
 def main() -> int:
     palette = validate_palette(json.loads(PALETTE.read_text(encoding="utf-8")))
     narrative = validate_copy(json.loads(CONTENT.read_text(encoding="utf-8")))
     wireframes = validate_wireframes()
     concept = validate_concept()
+    petscii = validate_petscii()
     print(f"VISUAL PASS: {palette['colors']} colors, {palette['pairs']} accessible text pairs, "
           f"{narrative['actors']} actors, {narrative['results']} result texts, "
-          f"{wireframes} original SVG wireframes, concept_svg={concept}")
+          f"{wireframes} original SVG wireframes, concept_svg={concept}, "
+          f"{petscii} 40x25 text layouts")
     return 0
 
 
