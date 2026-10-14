@@ -82,8 +82,8 @@ def validate_social(data: dict) -> int:
     require(isinstance(events, list) and len(events) >= 5, "No social causal events")
     require(len({e.get("event") for e in events}) == len(events), "Duplicate social events")
     require(all(e.get("change") in TRUST_STATES for e in events), "Unrecognized trust delta")
-    require(any("never" in c.lower() and "permission" in c.lower()
-                for c in data.get("constraints", [])), "Trust cannot grant authorization")
+    require("never grants legal permission" in data.get("rule", "").lower(),
+            "Trust cannot grant authorization")
     return sum(len(r["cells"]) for r in rows)
 
 
