@@ -1,0 +1,25 @@
++--------------------------------------+
+|THE DEPUTATION       EXP-0042         |
+|CLOCK SIM: 11/30        LEFT: 19      |
+|ROOM: ARCHIVE     STAGE: REVIEW       |
+|--------------------------------------|
+|PENDING TASKS / CASE 0042             |
+|                                      |
+|[+] READ CASE BASIS                   |
+|[+] REQUEST CASE-SCOPED PERMIT        |
+|[+] WAIT UNTIL ARCHIVE REVIEW         |
+|[+] READ ARCHIVE HISTORY              |
+|[ ] AWAIT AUTHORITATIVE READY         |
+|[ ] VALIDATE AT ARCHIVE               |
+|                                      |
+|PERMISSIONS:  CASE_0042 ONLY          |
+|KNOWN: BASIS + HISTORY                |
+|                                      |
+|MOVEMENT COSTS:                       |
+|  REGISTRY <-> ARCHIVE : 3 MIN        |
+|--------------------------------------|
+|RESULT: ARCHIVE_READ                  |
+|BY: MARCEL VIDAL                      |
+|WHY: HISTORY CONFIRMED                |
+|NEXT: WAIT FOR READY / M27            |
++--------------------------------------+
