@@ -14,3 +14,8 @@ Changes in this repository are recorded without treating planned features as shi
 ### Not included
 - No Godot scenes/runtime or C64 binaries.
 - No claim that all 45 observations are game-ready or hardware-certified.
+
+### EXP-0042 narrative/design and reference QA
+- Authored case timeline, practical loop, 15/45 M1 scope, denial feedback matrix and 5×5 social effects; emotional pacing for winning and losing routes.
+- Added pure host-only reference evaluator with immutable state and denial idempotence regression tests, plus JSON/prose design validators and CI checks.
+- **Not included:** an integrated 2–3 minute playable loop, Godot/C64 port, physical C64 certification, or working future M2 trust scheduling.
