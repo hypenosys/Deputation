@@ -27,6 +27,10 @@ Automatismos, memoria social, agendas, colas, incidentes, tres rutas de resoluci
 
 Las cámaras y landmarks se activan sobre el mismo estado, con espacios reales, diálogos y replay. La base del director narrativo sigue siendo un selector de eventos verificables; las cinemáticas no escriben la simulación.
 
+## Diferencias intencionadas frente al slice C actual
+
+En [ABBI sim.c](https://github.com/hypenosys/abbi/blob/feature/retro3d-performance-v3/src/c/deputation/sim.c), `archive_review` se activa **en m10** y el hecho `READY` aparece **en m27**. En [ABBI slice.c](https://github.com/hypenosys/abbi/blob/feature/retro3d-performance-v3/src/c/deputation/slice.c), la validación final se realiza **estando en Archive**. Los tests de autorización asumen ese escenario externo, no simulan dichos ticks. El código actual tampoco impide directamente validar tras el plazo en `dep_sim_validate_case`; bloquear `minute >= 30` es un **nuevo requisito M1**, no un comportamiento ya demostrado en C64. El contrato host añade trazabilidad `HISTORY` y permiso específico como requisitos propuestos para el port.
+
 ## C64 — presupuesto sujeto a evidencia
 
 La máquina tiene un espacio de direcciones de **64 KiB**, no 64 KiB libres para tablas. **No afirmar** que navegación, permisos, hechos y confianza precisan ya 20–30 KiB: no existe medida reproducible para esa cifra en Deputation. Compilar las 15 reglas, generar mapa real de `cc65` (CODE/RODATA/DATA/BSS/ZP, pantalla, charset y runtime) y medir tamaño y ciclos antes de decidir bancos, compresión o eliminación. Datos de archivo y documentos de autoría **no** forman parte del ejecutable.
