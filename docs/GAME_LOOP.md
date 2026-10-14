@@ -43,4 +43,6 @@ El [JSON de seis ciclos](../data/world/simulation_trace.json) subdivide los dos 
 - **Derrota M1:** la ventana alcanza m30 sin validación; se registra \`expired\` y se explica qué no se logró. No se borra conocimiento ni se desencadena una muerte ficticia.
 - **Resultado moral:** un éxito procesal puede seguir siendo éticamente incompleto; **no** existe todavía cómputo automático de «complicidad» ni finales ramificados implementados. Son propuestas M2 ([agencia](PLAYER_AGENCY.md)).
 
+**Cierre terminal:** tras `validated` o `expired`, cualquier orden de mundo se rechaza sin avanzar reloj; consultar estado continúa permitido. El host ghost comprueba ambas ramas, pero no es aún el game-over visual de C64/Godot.
+
 **Anti-objetivo:** nunca convertir un fallo legible en «no pasa nada». Cada \`DENY\` ha de indicar responsable, causa segura, minutos restantes y una ruta de respuesta. Véase [ACTION_MATRIX](behavior/ACTION_MATRIX.md).
