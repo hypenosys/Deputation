@@ -46,7 +46,7 @@ Propuesta de interfaz futura, sin código ejecutable aún:
 \`\`\`json
 {
   "event_id": "EVT-0042-0017",
-  "minute": 7,
+  "minute": 2,
   "kind": "request_denied",
   "source_actor": "SECRETARY",
   "case_id": "EXP-0042",
