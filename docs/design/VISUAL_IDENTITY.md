@@ -42,4 +42,6 @@ Use **generic** office technology, mimeograph copies, analogue index cards and a
 - [**Bandeja de trabajo**](wireframes/task_list.svg): deadlines and order of work; no arbitrary quest markers.
 - [**Ventanilla administrativa**](wireframes/administrative_view.svg): person/competence, denial with reason and next action.
 
+The original [office concept art](concepts/institutional_desk.svg) (editable SVG), [three host UI sketches](wireframes/case_open.svg) and [three constrained PETSCII screens](PETSCII_LAYOUT.md) form one set of art direction sources. The Godot [institutional desk](../../godot/README.md) reads the same authored palette and voice JSON, rather than shipping unrelated colors.
+
 **Visual gate:** before claiming a usable C64 UI, photograph/record on target palette and check truncation of cause/remaining time/next action at 40 columns; no color-only semantic distinctions.
