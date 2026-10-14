@@ -1,0 +1,25 @@
++--------------------------------------+
+|THE DEPUTATION       EXP-0042         |
+|CLOCK SIM: 02/30        LEFT: 28      |
+|ROOM: REGISTRY  STAGE: REGISTERED     |
+|--------------------------------------|
+|COUNTER 02 / SECRETARY                |
+|ELENA ROBLES                          |
+|AUTHORITY: CASE PERMISSIONS           |
+|PERMITTED SCOPE: EXP-0042 ONLY        |
+|                                      |
+|REQUEST TO INSPECT ARCHIVE FILE       |
+|[ ] REASON ATTACHED: NO               |
+|[ ] PERMIT GRANTED: NO                |
+|                                      |
+|"A CASE NEEDS A REGISTERED BASIS."    |
+|                                      |
+|OPTIONS:                              |
+|[>] READ CASE FILE                    |
+|[ ] REQUEST PERMIT AGAIN              |
+|--------------------------------------|
+|DENIED: MISSING_CASE_BASIS            |
+|BY: SECRETARY                         |
+|WHY: CASE BASIS MISSING               |
+|NEXT: READ CASE FILE                  |
++--------------------------------------+
