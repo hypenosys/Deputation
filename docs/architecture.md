@@ -49,3 +49,11 @@ A future Godot front end may use GDScript nodes to display the world; a separate
 3. Three camera modes do not modify authoritative simulation state.
 4. Runtime platform claims are backed by the *exact artifact* and reproducible logs.
 5. Only then may "implemented" or "validated" replace the research statuses.
+
+## EXP-0042 playable specification, separate from runtime
+
+The [authored case](design/EXP-0042_case_arc.md) supplies motive, stakeholders and a 30-minute diegetic window. The [moment-to-moment loop](design/moment_to_moment.md) defines a 2–3 **real-minute** repeated player cycle. The [15-mechanic M1 selection](design/M1_scope.md) limits the production target. [Denial feedback](design/denial_feedback.md) is a pure view of rejection codes; [trust scheduling](design/social_dynamics.md) is an M2-only proposal and **cannot** grant legal authority. The [reference evaluator](../tools/authority_reference.py) and [negative tests](../tests/test_denied_permit_idempotence.py) make denied-permission idempotence executable in Python only. The full game remains unimplemented here.
+
+## Ludological reference oracle and causal design
+
+The player verb is **acreditar** (investigate and prove), the unit is a case, and [GAME LOOP](GAME_LOOP.md) is the canonical M1 gameplay grammar. [ACTION MATRIX](behavior/ACTION_MATRIX.md) maps player actions to guards, transition and readable feedback. [NARRATIVE ENGINE](NARRATIVE_ENGINE.md) specifies a hybrid: a deterministic kernel emits facts while an authored director selects permissible beats without inventing outcomes. The host-only [trace runner](../tools/simulate_trace.py) can replay six cycles to validation and an alternative expiry, applying the M1-relevant m10/m15/m27 milestones. It **does not** implement M2 trust/incident or C64 render. [C64 resource constraints](CONSTRAINTS.md) remain engineering targets pending linker and cycle evidence.

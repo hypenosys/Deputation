@@ -7,17 +7,30 @@
 - Validate unique IDs, provenance, links, scenario topology and the status ledger.
 - Publish an initial CI gate and documentation.
 
-## M1 — Canonical game runtime
+## M0.5 — EXP-0042 narrative and negative-action specification (design stage)
 
-Implement a deterministic institution kernel independent of renderer; port essential navigation/time/EXP-0042 logic from ABBI with tests rather than copying assumptions. Tests for a denied action changing no world state, monotonic time, permission checks and knowledge provenance.
+- Author [case arc](design/EXP-0042_case_arc.md), [moment-to-moment loop](design/moment_to_moment.md), [denial feedback matrix](design/denial_feedback.md), [social dynamics matrix](design/social_dynamics.md), and [winning/losing pacing curves](design/case_pacing.md).
+- Require `python tools/validate_design.py` and negative tests against a [pure reference evaluator](../tools/authority_reference.py); these checks do **not** certify a playable M1 or a native port.
+- Partition **45 research records** as [M1=15, M2=23, M3=7](../data/design/m1_scope.json), preserving IDs and existing source-evidence labels.
 
-## M2 — Causal institutional systems
+## M0.6 — Ludological grammar and executable paper ghost
+
+- Canonical [GAME LOOP](GAME_LOOP.md), [ACTION MATRIX](behavior/ACTION_MATRIX.md), [PLAYER AGENCY](PLAYER_AGENCY.md), [NARRATIVE ENGINE](NARRATIVE_ENGINE.md), [DESIGN BASELINE](DESIGN_BASELINE.md).
+- Run six-cycle [winning](../data/world/simulation_trace.json) and [losing](../data/world/simulation_trace_failure.json) ghost traces through [Python reference simulation](../tools/simulate_trace.py) and negative replay tests in CI.
+- Apply [blind playtest protocol](PLAYTESTING_PROTOCOL.md) with actual participants separately; automated traces **do not** demonstrate a fun or usable UI.
+- Document [target C64 limits](CONSTRAINTS.md) as provisional budgets requiring cc65 map and cycle evidence.
+
+## M1 — Canonical game runtime (15 essential mechanics)
+
+Implement [the exact 15-mechanic subset](design/M1_scope.md): navigation, action/travel time, EXP-0042 phase/knowledge/deadline/validation, objectives, HUD, view invariance, case-scoped permissions, and authorized disclosures. The last three have only host-prototype evidence in the archive; integration is new work. Port deterministic institution transitions independently of the renderer. Test **rejected action leaves identical authoritative state** (including minute, trust, and knowledge), monotonic time on accepted moves, permission scopes, deadline behavior, visible denial reasons and positive/negative playthroughs. Do not conflate game minutes with the player's 2–3 minute real-time interaction cycle.
+
+## M2 — Causal institutional systems (23 deferred observations)
 
 Integrate queues, capacity, autonomous schedules, incidents, authorization scopes and social trust into *one* runtime. At least three outcomes must emerge from the rules, not from scripted camera triggers.
 
-## M3 — Godot interactive vertical slice
+## M3 — Godot interactive vertical slice (7 deferred observations)
 
-Create Courtyard, Registry and Archive environments with navigation and interactions. Switch between first-person retro 3D, isometric and 2D views over the **same** game state. Godot headless integration tests and observable time/knowledge invariance.
+Create Courtyard, Registry and Archive environments with navigation and interactions. Build a [state debugger](STATE_DEBUGGER.md) that shows the canonical state, denial reasons and step hashes during development. Switch between first-person retro 3D, isometric and 2D views over the **same** game state. Godot headless integration tests and observable time/knowledge invariance.
 
 ## M4 — Native C64 adapter and hardware gates
 

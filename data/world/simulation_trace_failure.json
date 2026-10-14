@@ -1,0 +1,97 @@
+{
+  "schema": "deputation.simulation_trace.v1",
+  "name": "EXP-0042 / losing paper-playtest ghost",
+  "case_id": "EXP-0042",
+  "model": "Same canonical oracle, different player choices",
+  "unit": "simulation minutes, not real playtime",
+  "scope": "counterexample replay: waiting is an explicit consequential action",
+  "cycles": [
+    {
+      "id": "L01",
+      "intent": "Get legitimate permission but spend time moving",
+      "actions": [
+        {
+          "type": "move",
+          "target": "REGISTRY",
+          "expect_code": "MOVED",
+          "expect_minute": 2
+        },
+        {
+          "type": "read_case_file",
+          "expect_code": "CASE_FILE_READ",
+          "expect_minute": 3
+        },
+        {
+          "type": "request_permit",
+          "expect_code": "PERMIT_GRANTED",
+          "expect_minute": 4
+        },
+        {
+          "type": "move",
+          "target": "ARCHIVE",
+          "expect_code": "MOVED",
+          "expect_minute": 7
+        }
+      ],
+      "expect_end": {
+        "minute": 7,
+        "room": "ARCHIVE",
+        "stage": "registered",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "L02",
+      "intent": "Wait through the review milestone, then delay without gaining leverage",
+      "actions": [
+        {
+          "type": "wait",
+          "minutes": 3,
+          "expect_code": "WAITED",
+          "expect_minute": 10
+        },
+        {
+          "type": "read_archive",
+          "expect_code": "ARCHIVE_READ",
+          "expect_minute": 11
+        },
+        {
+          "type": "wait",
+          "minutes": 13,
+          "expect_code": "WAITED",
+          "expect_minute": 24
+        }
+      ],
+      "expect_end": {
+        "minute": 24,
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "L03",
+      "intent": "Expire the window and receive an explanatory refusal, not hidden state changes",
+      "actions": [
+        {
+          "type": "wait",
+          "minutes": 6,
+          "expect_code": "WAITED",
+          "expect_minute": 30
+        },
+        {
+          "type": "validate_case",
+          "expect_code": "DEADLINE_EXPIRED",
+          "expect_minute": 30
+        }
+      ],
+      "expect_end": {
+        "minute": 30,
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "outcome": "expired"
+      }
+    }
+  ],
+  "expect_outcome": "expired"
+}

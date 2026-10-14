@@ -1,0 +1,62 @@
+{
+  "schema": "deputation.milestone_scope.v1",
+  "status": "design_not_runtime",
+  "canonical_source": "data/mechanics/extraction.v1.json",
+  "M1": [
+    "DPT-M-001",
+    "DPT-M-002",
+    "DPT-M-004",
+    "DPT-M-005",
+    "DPT-M-007",
+    "DPT-M-009",
+    "DPT-M-012",
+    "DPT-M-013",
+    "DPT-M-016",
+    "DPT-M-017",
+    "DPT-M-018",
+    "DPT-M-021",
+    "DPT-M-022",
+    "DPT-M-025",
+    "DPT-M-026"
+  ],
+  "M2": [
+    "DPT-M-003",
+    "DPT-M-006",
+    "DPT-M-008",
+    "DPT-M-010",
+    "DPT-M-011",
+    "DPT-M-014",
+    "DPT-M-015",
+    "DPT-M-023",
+    "DPT-M-024",
+    "DPT-M-027",
+    "DPT-M-028",
+    "DPT-M-029",
+    "DPT-M-030",
+    "DPT-M-031",
+    "DPT-M-032",
+    "DPT-M-033",
+    "DPT-M-034",
+    "DPT-M-035",
+    "DPT-M-036",
+    "DPT-M-037",
+    "DPT-M-038",
+    "DPT-M-039",
+    "DPT-M-040"
+  ],
+  "M3": [
+    "DPT-M-019",
+    "DPT-M-020",
+    "DPT-M-041",
+    "DPT-M-042",
+    "DPT-M-043",
+    "DPT-M-044",
+    "DPT-M-045"
+  ],
+  "notes": [
+    "No DPT-M identity is renumbered or promoted by its inclusion in a milestone.",
+    "M1 022/025/026 need fresh integrated implementations; source evidence remains host_prototype.",
+    "M2 and M3 are allocations, not completed features.",
+    "Runtime memory budgets and hardware certification remain unmeasured."
+  ]
+}

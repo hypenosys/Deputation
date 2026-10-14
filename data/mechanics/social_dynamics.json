@@ -1,0 +1,198 @@
+{
+  "schema": "deputation.social_dynamics.v1",
+  "status": "M2_design_only",
+  "case_id": "EXP-0042",
+  "rule": "Changes are per observer-target relationship; trust never grants legal permission, never transfers a fact and never silently extends the 30-minute deadline.",
+  "basis": "Wait deltas affect the next eligible interaction, floored at zero waiting minutes; they are illustrative balancing values, not C64 runtime measurements.",
+  "trust_change_states": [
+    "severe_loss",
+    "minor_loss",
+    "unchanged",
+    "minor_gain",
+    "major_gain"
+  ],
+  "events": [
+    {
+      "event": "proven_false_statement",
+      "change": "severe_loss"
+    },
+    {
+      "event": "unauthorized_probe",
+      "change": "severe_loss"
+    },
+    {
+      "event": "missed_commitment",
+      "change": "minor_loss"
+    },
+    {
+      "event": "neutral_formal_request",
+      "change": "unchanged"
+    },
+    {
+      "event": "verified_assistance",
+      "change": "minor_gain"
+    },
+    {
+      "event": "documented_prior_success",
+      "change": "major_gain"
+    }
+  ],
+  "matrix": [
+    {
+      "actor_type": "registry_clerk",
+      "cells": [
+        {
+          "trust_state_change": "severe_loss",
+          "next_wait_delta_minutes": 6,
+          "availability_rule": "supervisor_review"
+        },
+        {
+          "trust_state_change": "minor_loss",
+          "next_wait_delta_minutes": 3,
+          "availability_rule": "priority_reduced"
+        },
+        {
+          "trust_state_change": "unchanged",
+          "next_wait_delta_minutes": 0,
+          "availability_rule": "standard_queue"
+        },
+        {
+          "trust_state_change": "minor_gain",
+          "next_wait_delta_minutes": -1,
+          "availability_rule": "priority_improved"
+        },
+        {
+          "trust_state_change": "major_gain",
+          "next_wait_delta_minutes": -2,
+          "availability_rule": "priority_improved_bounded"
+        }
+      ]
+    },
+    {
+      "actor_type": "secretary",
+      "cells": [
+        {
+          "trust_state_change": "severe_loss",
+          "next_wait_delta_minutes": 8,
+          "availability_rule": "appointment_required"
+        },
+        {
+          "trust_state_change": "minor_loss",
+          "next_wait_delta_minutes": 4,
+          "availability_rule": "priority_reduced"
+        },
+        {
+          "trust_state_change": "unchanged",
+          "next_wait_delta_minutes": 0,
+          "availability_rule": "standard_queue"
+        },
+        {
+          "trust_state_change": "minor_gain",
+          "next_wait_delta_minutes": -1,
+          "availability_rule": "priority_improved"
+        },
+        {
+          "trust_state_change": "major_gain",
+          "next_wait_delta_minutes": -2,
+          "availability_rule": "priority_improved_bounded"
+        }
+      ]
+    },
+    {
+      "actor_type": "archivist",
+      "cells": [
+        {
+          "trust_state_change": "severe_loss",
+          "next_wait_delta_minutes": 6,
+          "availability_rule": "documented_request_only"
+        },
+        {
+          "trust_state_change": "minor_loss",
+          "next_wait_delta_minutes": 3,
+          "availability_rule": "priority_reduced"
+        },
+        {
+          "trust_state_change": "unchanged",
+          "next_wait_delta_minutes": 0,
+          "availability_rule": "standard_queue"
+        },
+        {
+          "trust_state_change": "minor_gain",
+          "next_wait_delta_minutes": -1,
+          "availability_rule": "priority_improved"
+        },
+        {
+          "trust_state_change": "major_gain",
+          "next_wait_delta_minutes": -1,
+          "availability_rule": "priority_improved_bounded"
+        }
+      ]
+    },
+    {
+      "actor_type": "case_supervisor",
+      "cells": [
+        {
+          "trust_state_change": "severe_loss",
+          "next_wait_delta_minutes": 10,
+          "availability_rule": "formal_review"
+        },
+        {
+          "trust_state_change": "minor_loss",
+          "next_wait_delta_minutes": 5,
+          "availability_rule": "priority_reduced"
+        },
+        {
+          "trust_state_change": "unchanged",
+          "next_wait_delta_minutes": 0,
+          "availability_rule": "standard_queue"
+        },
+        {
+          "trust_state_change": "minor_gain",
+          "next_wait_delta_minutes": -2,
+          "availability_rule": "priority_improved"
+        },
+        {
+          "trust_state_change": "major_gain",
+          "next_wait_delta_minutes": -3,
+          "availability_rule": "priority_improved_bounded"
+        }
+      ]
+    },
+    {
+      "actor_type": "witness_liaison",
+      "cells": [
+        {
+          "trust_state_change": "severe_loss",
+          "next_wait_delta_minutes": 4,
+          "availability_rule": "written_contact_only"
+        },
+        {
+          "trust_state_change": "minor_loss",
+          "next_wait_delta_minutes": 2,
+          "availability_rule": "priority_reduced"
+        },
+        {
+          "trust_state_change": "unchanged",
+          "next_wait_delta_minutes": 0,
+          "availability_rule": "standard_queue"
+        },
+        {
+          "trust_state_change": "minor_gain",
+          "next_wait_delta_minutes": -1,
+          "availability_rule": "priority_improved"
+        },
+        {
+          "trust_state_change": "major_gain",
+          "next_wait_delta_minutes": -2,
+          "availability_rule": "priority_improved_bounded"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    "Case-scoped access is checked independently of trust.",
+    "Only observed and attributable social actions may change a relationship.",
+    "No automatic +12-hour extension: requires an explicit competent authority and separate case rule in M2.",
+    "Time costs apply to actual successful service or explicit wait actions, never a rejected command."
+  ]
+}
