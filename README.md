@@ -13,6 +13,7 @@ THE DEPUTATION explores a fictional institution as a systemic game: deadlines, k
 - [11 draft behavior contracts](data/mechanics/contracts.v1.json) for the highest-value systems.
 - [Canonical fictional three-room world](data/world/vertical_slice.v1.json).
 - [Architecture](docs/architecture.md), [development roadmap](docs/roadmap.md) and [contribution requirements](CONTRIBUTING.md).
+- [EXP-0042 case arc](docs/design/EXP-0042_case_arc.md), [2–3 minute loop](docs/design/moment_to_moment.md), [denial feedback](docs/design/denial_feedback.md), [trust dynamics](docs/design/social_dynamics.md), [pacing](docs/design/case_pacing.md), [M1 scope (15/45)](docs/design/M1_scope.md).
 - Python standard-library checks and CI, **not** a claim of executable 45-mechanic integration.
 
 ## First verification
@@ -21,6 +22,7 @@ Requires Python 3.11+ (no external dependencies):
 
 ```bash
 python tools/validate_mechanics.py
+python tools/validate_design.py
 python -m unittest discover -s tests -v
 ```
 
@@ -37,3 +39,7 @@ Mechanics have *descriptions*, IDs, source paths and links; this repository does
 ## Hypenosys standards
 
 [Hypenosys development documentation](https://dev.hypenosys.com/documentacion) is the intended authority. It was unreachable during the initial import and **formal compliance remains pending**, documented in [standards adoption](docs/standards/HYPENOSYS_ADOPTION.md). This initial scaffold uses explicit evidence, tests, architectural boundaries and reviewable pull requests; it does not invent unpublished requirements.
+
+## Narrative design and reference-contract boundary
+
+EXP-0042 has a fictional narrative proposal plus **pure Python refusal/permission contract** (`tools/authority_reference.py`). `tests/test_denied_permit_idempotence.py` tests that refusal returns the same frozen authoritative state without charging time or revealing knowledge. This is **not the M1 playable loop**: it does not implement room movement, real personnel schedules, queues, trust processing or render an in-game UI. Authoritative actions, including the scripted evidence timing from ABBI, must be ported and verified before claiming a playable slice. All 45 extraction records remain archival observations; only 15 are allocated to M1.
