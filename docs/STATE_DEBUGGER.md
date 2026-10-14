@@ -8,15 +8,15 @@ El inspector deberá mostrar en tiempo real **el estado autoritativo del kernel*
 - **Caso:** ID, sala del expediente, fase, requisitos para la siguiente transición, y fuente de cada cambio.
 - **Jugador:** sala, verbos disponibles, permisos acotados, conocimiento por procedencia y estado final.
 - **Actores (M2):** sala/agenda, hechos observados, confianza por observador y próximas ventanas de atención.
-- **Guardas:** motivo de la última aceptación/rechazo, decisión, reloj antes/después, diferencias de estado. Denegación exige \`pre_sha256 == post_sha256\`.
+- **Guardas:** motivo de la última aceptación/rechazo, decisión, reloj antes/después, diferencias de estado. Denegación exige `pre_sha256 == post_sha256`.
 - **Presentación:** modo de cámara actual y hash institucional: cambiarla jamás varía el hash.
-- **Reproducción:** importar acciones de \`data/world/simulation_trace.json\` y ver el mismo hash paso a paso en un entorno host/Godot, sin cambiar la verdad para obtener una imagen deseada.
+- **Reproducción:** importar acciones de `data/world/simulation_trace.json` y ver el mismo hash paso a paso en un entorno host/Godot, sin cambiar la verdad para obtener una imagen deseada.
 
 ## Contrato técnico
 
 Propuesta de snapshot de depuración (no es protocolo productivo implementado):
 
-\`\`\`json
+```json
 {
   "minute": 18,
   "case_id": "EXP-0042",
@@ -29,7 +29,7 @@ Propuesta de snapshot de depuración (no es protocolo productivo implementado):
   "unchanged": true,
   "state_sha256": "<sha256 de estado canónico real>"
 }
-\`\`\`
+```
 
 El campo de hash se calcula del estado real; el literal es solo una plantilla de diseño. No expone secretos que el jugador no conoce en un build comercial: el modo developer permite inspeccionar, pero logs accesibles al usuario siguen políticas epistemológicas. Exportar la secuencia como JSON legible, con inputs y hashes, para diagnóstico de errores. Sin incorporar trazas con datos personales reales.
 
