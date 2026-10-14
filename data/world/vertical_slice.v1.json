@@ -1,0 +1,75 @@
+{
+  "schema": "deputation.world.v1",
+  "world_id": "deputation_slice_01",
+  "rooms": [
+    {
+      "id": 1,
+      "symbol": "COURTYARD",
+      "exits": [
+        2
+      ],
+      "interaction": 0,
+      "camera_anchor": [
+        8,
+        9,
+        0
+      ],
+      "travel_minutes": [
+        2,
+        0
+      ]
+    },
+    {
+      "id": 2,
+      "symbol": "REGISTRY",
+      "exits": [
+        1,
+        3
+      ],
+      "interaction": 1,
+      "camera_anchor": [
+        6,
+        5,
+        2
+      ],
+      "travel_minutes": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "symbol": "ARCHIVE",
+      "exits": [
+        2
+      ],
+      "interaction": 1,
+      "camera_anchor": [
+        10,
+        7,
+        4
+      ],
+      "travel_minutes": [
+        3,
+        0
+      ]
+    }
+  ],
+  "route": [
+    1,
+    2,
+    3
+  ],
+  "case": {
+    "id": 0,
+    "symbol": "EXP0042",
+    "start_room": 2,
+    "deadline_minute": 30
+  },
+  "limits": {
+    "rooms": 3,
+    "exits_per_room": 2,
+    "interaction_points": 2
+  },
+  "notes": "Fictional topology. No literal institutional floor plan."
+}

@@ -1,0 +1,565 @@
+{
+  "schema": "deputation.extraction.v1",
+  "game": "THE DEPUTATION",
+  "studio": "Empty Space Videogames",
+  "framework": "ABBI",
+  "repository": "hypenosys/abbi",
+  "branch": "feature/retro3d-performance-v3",
+  "observed_git_sha": "e876cda71b21712860bf742d6de6689161940fdf",
+  "inspection_method": "static GitHub connector source inspection + project conversation context; no runtime execution this turn",
+  "limitations": [
+    "DPT IDs are extraction IDs, not assigned ABBI-M canonical identifiers.",
+    "c64_source means source exists in the C64 gameplay path, not hardware certification.",
+    "c_module_not_wired indicates C helper exists but is not used by C64 main gameplay loop.",
+    "host_prototype indicates isolated Python prototype or fixture; not necessarily carried into C64 gameplay.",
+    "design_goal is not implemented and should not be counted as executable."
+  ],
+  "counts": {
+    "c64_source": 19,
+    "c_module_not_wired": 2,
+    "host_prototype": 18,
+    "design_goal": 6
+  },
+  "mechanics": [
+    {
+      "id": "DPT-M-001",
+      "name": "Navegación por grafo de dependencias espaciales",
+      "domain": "Espacio",
+      "evidence_level": "c64_source",
+      "description": "El jugador cambia de estancia solo si existe un arco en la topología compilada.",
+      "source_paths": [
+        "src/c/deputation/navigation.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000111",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-002",
+      "name": "Coste temporal del desplazamiento",
+      "domain": "Tiempo",
+      "evidence_level": "c64_source",
+      "description": "Cada salida válida tiene un coste en minutos; el reloj avanza atravesando los minutos intermedios.",
+      "source_paths": [
+        "src/c/deputation/navigation.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000005",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-003",
+      "name": "Desvíos y retorno sin bloquear progresión",
+      "domain": "Espacio",
+      "evidence_level": "c64_source",
+      "description": "El jugador puede recorrer salidas A/B, regresar y retomar la secuencia si vuelve al lugar adecuado.",
+      "source_paths": [
+        "src/c/deputation/slice.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000111",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-004",
+      "name": "Interacciones dependientes de estancia",
+      "domain": "Interacción",
+      "evidence_level": "c64_source",
+      "description": "Las acciones de registro y archivo se rechazan si el jugador no está en la estancia requerida.",
+      "source_paths": [
+        "src/c/deputation/slice.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000025",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-005",
+      "name": "Reloj institucional irreversible",
+      "domain": "Tiempo",
+      "evidence_level": "c64_source",
+      "description": "Los avances temporales no pueden retroceder y deben atravesar cada minuto.",
+      "source_paths": [
+        "src/c/deputation/time.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000005",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-006",
+      "name": "Rutina autónoma del archivero",
+      "domain": "IA",
+      "evidence_level": "c64_source",
+      "description": "La posición del archivista cambia al llegar el minuto 5, independientemente de la cámara.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000024",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-007",
+      "name": "Máquina de estados del expediente EXP-0042",
+      "domain": "Expedientes",
+      "evidence_level": "c64_source",
+      "description": "Un caso pasa por registered, archive_review y validated de manera reglada.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000032",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-008",
+      "name": "Traslado institucional del expediente",
+      "domain": "Expedientes",
+      "evidence_level": "c64_source",
+      "description": "La estancia del expediente cambia automáticamente durante el flujo de revisión y validación.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": null,
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-009",
+      "name": "Conocimiento del jugador en bits",
+      "domain": "Conocimiento",
+      "evidence_level": "c64_source",
+      "description": "Los hitos temporales 15 y 27 incorporan hechos al bitset de conocimiento del jugador.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000080",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-010",
+      "name": "Valor de relación institucional",
+      "domain": "Social",
+      "evidence_level": "c64_source",
+      "description": "La simulación modifica un valor firmado de relación en el minuto 18.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000034",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-011",
+      "name": "Incidente de conexión con apertura y cierre",
+      "domain": "Incidentes",
+      "evidence_level": "c64_source",
+      "description": "Una bandera de incidente de Registry se activa en minuto 20 y se desactiva en 24.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000031",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-012",
+      "name": "Validación del caso por conocimiento y fase",
+      "domain": "Expedientes",
+      "evidence_level": "c64_source",
+      "description": "La validación exige el hecho READY y la fase ARCHIVE_REVIEW y ocurre por acción explícita.",
+      "source_paths": [
+        "src/c/deputation/sim.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000032",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-013",
+      "name": "Plazo seguro, urgente y vencido",
+      "domain": "Tiempo",
+      "evidence_level": "c64_source",
+      "description": "El estado del plazo se deriva del minuto y de su deadline; urgente si quedan 5 minutos o menos.",
+      "source_paths": [
+        "src/c/deputation/deadline.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000004",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-014",
+      "name": "Generación de consecuencia por vencimiento",
+      "domain": "Consecuencias",
+      "evidence_level": "c_module_not_wired",
+      "description": "Se deriva una late review y una penalización potencial; falta integración en el bucle jugable principal.",
+      "source_paths": [
+        "src/c/deputation/consequence.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000079",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-015",
+      "name": "Revisión manual tras retraso",
+      "domain": "Consecuencias",
+      "evidence_level": "c_module_not_wired",
+      "description": "La revisión obligatoria se puede resolver y reduce relación una sola vez según el estado local de review.",
+      "source_paths": [
+        "src/c/deputation/review.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000079",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-016",
+      "name": "Objetivos dinámicos por fase y posición",
+      "domain": "Objetivos",
+      "evidence_level": "c64_source",
+      "description": "El objetivo y el indicador de estar en su estancia se derivan del estado del slice.",
+      "source_paths": [
+        "src/c/deputation/objective.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000032",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-017",
+      "name": "Condición de cierre y victoria del slice",
+      "domain": "Objetivos",
+      "evidence_level": "c64_source",
+      "description": "La última validación fija fase DONE y complete y bloquea pasos posteriores.",
+      "source_paths": [
+        "src/c/deputation/slice.c"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000032",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-018",
+      "name": "Cámara independiente del estado institucional",
+      "domain": "Representación",
+      "evidence_level": "c64_source",
+      "description": "La vista transforma estado sin avanzar minuto, mutar expediente ni mover NPC.",
+      "source_paths": [
+        "src/c/deputation/render.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000001",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-019",
+      "name": "Triple vista PETSCII, isométrica y Retro3D",
+      "domain": "Representación",
+      "evidence_level": "c64_source",
+      "description": "Adaptadores seleccionan raycasting, isométrico y wireframe del motor; no hay una vista cenital 2D general aquí.",
+      "source_paths": [
+        "src/c/deputation/retro3d_adapter.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000001",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-020",
+      "name": "Reconocimiento de salas por señales y siluetas",
+      "domain": "Representación",
+      "evidence_level": "c64_source",
+      "description": "Courtyard, Registry y Archive estampan motivos visuales distintos; son overlays, no geometría interactiva.",
+      "source_paths": [
+        "src/c/deputation/room_landmarks.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000113",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-021",
+      "name": "HUD de plazo, objetivo, urgencia y localización",
+      "domain": "Interfaz",
+      "evidence_level": "c64_source",
+      "description": "La primera fila del VIC-II muestra expediente, cuenta atrás, objetivo y estado seguro/urgente/tarde.",
+      "source_paths": [
+        "src/c/deputation/hud.h"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000115",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-022",
+      "name": "Control de acceso por rol y zona",
+      "domain": "Acceso",
+      "evidence_level": "host_prototype",
+      "description": "Un visitante sin permiso ARCHIVE recibe DENY en la demostración host.",
+      "source_paths": [
+        "tools/deputation/sim_day2.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000073",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-023",
+      "name": "Competencias para transiciones de expediente",
+      "domain": "Acceso",
+      "evidence_level": "host_prototype",
+      "description": "Una fase requiere rol de archivero; es un contrato de fixture y no está aplicado por el slice nativo.",
+      "source_paths": [
+        "data/deputation/day2.json"
+      ],
+      "abbi_candidate_relation": null,
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-024",
+      "name": "Conocimiento local de acontecimientos",
+      "domain": "Percepción",
+      "evidence_level": "host_prototype",
+      "description": "Solo los testigos definidos reciben noticias de eventos; no hay conocimiento omnisciente.",
+      "source_paths": [
+        "tools/deputation/sim_day2.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000080",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-025",
+      "name": "Solicitud y autorización de acceso específico",
+      "domain": "Acceso",
+      "evidence_level": "host_prototype",
+      "description": "El secretario puede conceder ARCHIVE_CASE_0042 sin conceder acceso general al Archivo.",
+      "source_paths": [
+        "tools/deputation/sim_day4.py"
+      ],
+      "abbi_candidate_relation": null,
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-026",
+      "name": "Divulgación autorizada de información",
+      "domain": "Conocimiento",
+      "evidence_level": "host_prototype",
+      "description": "El jugador aprende HISTORIA únicamente tras autorización y acceso al archivero.",
+      "source_paths": [
+        "tools/deputation/sim_day4.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000080",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-027",
+      "name": "Agendas, reuniones y ventanas de atención",
+      "domain": "Tiempo",
+      "evidence_level": "host_prototype",
+      "description": "El secretario no está disponible durante una reunión; la solicitud debe esperar y puede llegar tarde.",
+      "source_paths": [
+        "tools/deputation/sim_day5.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000024",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-028",
+      "name": "Dependencia funcional entre servicios y trámites",
+      "domain": "Incidentes",
+      "evidence_level": "host_prototype",
+      "description": "Un terminal fuera de servicio bloquea el avance administrativo hasta su restauración.",
+      "source_paths": [
+        "tools/deputation/sim_day3.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000031",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-029",
+      "name": "Respuesta de técnico ante incidencias",
+      "domain": "IA",
+      "evidence_level": "host_prototype",
+      "description": "El técnico se desplaza para reparar el servicio sin intervención del jugador.",
+      "source_paths": [
+        "tools/deputation/sim_day3.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000024",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-030",
+      "name": "Duración del procesamiento de solicitudes",
+      "domain": "Tiempo",
+      "evidence_level": "host_prototype",
+      "description": "Aceptar una solicitud no implica completarla al instante; se consumen minutos y se evalúa el plazo.",
+      "source_paths": [
+        "tools/deputation/sim_day5.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000005",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-031",
+      "name": "Presión institucional acumulativa",
+      "domain": "Incidentes",
+      "evidence_level": "host_prototype",
+      "description": "Varias señales independientes suman severidad y superan umbrales de coordinación.",
+      "source_paths": [
+        "tools/deputation/sim_day9.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000004",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-032",
+      "name": "Coordinación interdepartamental reactiva",
+      "domain": "Incidentes",
+      "evidence_level": "host_prototype",
+      "description": "El umbral de presión activa una respuesta compartida que reduce presión sin borrar los hechos.",
+      "source_paths": [
+        "tools/deputation/sim_day9.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000031",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-033",
+      "name": "Capacidad limitada de departamentos y colas",
+      "domain": "Recursos",
+      "evidence_level": "host_prototype",
+      "description": "Cada recurso humano procesa una única tarea a la vez, generando tiempos de espera.",
+      "source_paths": [
+        "tools/deputation/sim_day10.py"
+      ],
+      "abbi_candidate_relation": null,
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-034",
+      "name": "Despacho con prioridades y desempate estable",
+      "domain": "Recursos",
+      "evidence_level": "host_prototype",
+      "description": "Entre tareas disponibles gana mayor prioridad; empate por llegada y luego ID.",
+      "source_paths": [
+        "tools/deputation/sim_day10.py"
+      ],
+      "abbi_candidate_relation": null,
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-035",
+      "name": "Memoria social de ayuda y conducta intrusiva",
+      "domain": "Social",
+      "evidence_level": "host_prototype",
+      "description": "Help incrementa confianza, unauthorized_probe la reduce y ambos dejan memoria social.",
+      "source_paths": [
+        "tools/deputation/sim_day11.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000034",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-036",
+      "name": "Revelación de hechos condicionada por confianza",
+      "domain": "Social",
+      "evidence_level": "host_prototype",
+      "description": "El funcionario concede o niega información según un umbral de confianza.",
+      "source_paths": [
+        "tools/deputation/sim_day11.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000077",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-037",
+      "name": "Cola de eventos por tiempo, prioridad e identidad",
+      "domain": "Eventos",
+      "evidence_level": "host_prototype",
+      "description": "Se ordenan eventos por minuto, prioridad, tipo y sujeto para reproducibilidad.",
+      "source_paths": [
+        "tools/deputation/day6_events.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000031",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-038",
+      "name": "Director que selecciona hechos sin fabricarlos",
+      "domain": "Narrativa",
+      "evidence_level": "host_prototype",
+      "description": "El selector narrativo filtra eventos relevantes; no inventa cambios en el mundo.",
+      "source_paths": [
+        "tools/deputation/day6_director.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000078",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-039",
+      "name": "Hash y reproducibilidad de simulación",
+      "domain": "Verificación",
+      "evidence_level": "host_prototype",
+      "description": "Serialización canónica y SHA256 detectan divergencias entre ejecuciones host.",
+      "source_paths": [
+        "tools/deputation/sim_core.py"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000106",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-040",
+      "name": "Tres soluciones sistémicas al mismo problema",
+      "domain": "Diseño",
+      "evidence_level": "design_goal",
+      "description": "Meta de diseño M2: tres rutas de resolución demostradas; no hay soporte probado en el slice nativo.",
+      "source_paths": [
+        "docs/production/THE_DEPUTATION_PRODUCTION_PIPELINE.md"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000083",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-041",
+      "name": "Mundo espacial navegable con geometría por estancia",
+      "domain": "Diseño",
+      "evidence_level": "design_goal",
+      "description": "Definir colisiones, muebles, puertas, portales y oclusiones propios de cada sala, no solo overlays.",
+      "source_paths": [
+        "docs/production/DEPUTATION_VISUAL_ARCHITECTURE_V1.md"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000113",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-042",
+      "name": "Población institucional general y simulación fuera de cámara",
+      "domain": "Diseño",
+      "evidence_level": "design_goal",
+      "description": "Ampliación de NPC con comportamientos y horarios más allá de eventos de reloj fijos.",
+      "source_paths": [
+        "docs/production/THE_DEPUTATION_PRODUCTION_PIPELINE.md"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000024",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-043",
+      "name": "Rutas secretas e investigación opcional",
+      "domain": "Diseño",
+      "evidence_level": "design_goal",
+      "description": "Añadir secretos y trayectos alternativos con efectos verificables sobre el trámite.",
+      "source_paths": [
+        "docs/production/THE_DEPUTATION_PRODUCTION_PIPELINE.md"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000080",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-044",
+      "name": "Guardar partida y replay reproducible de entradas",
+      "domain": "Diseño",
+      "evidence_level": "design_goal",
+      "description": "Persistencia y replays reales del juego integrado, diferenciados de hashes de fixtures.",
+      "source_paths": [
+        "docs/production/THE_DEPUTATION_PRODUCTION_PIPELINE.md"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000044",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    },
+    {
+      "id": "DPT-M-045",
+      "name": "Diálogo y decisiones sociales libres",
+      "domain": "Diseño",
+      "evidence_level": "design_goal",
+      "description": "Contenido conversacional interactivo para consultar, convencer o intercambiar información con funcionarios.",
+      "source_paths": [
+        "docs/production/THE_DEPUTATION_PRODUCTION_PIPELINE.md"
+      ],
+      "abbi_candidate_relation": "ABBI-M-000033",
+      "historical_claim": "Not a claim of invention; extracted from project repository and conversations."
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "schema": "deputation.mechanic_contracts.v1",
+  "purpose": "Authored executable-design contracts; not runtime certification",
+  "source_catalog": "data/mechanics/extraction.v1.json",
+  "contracts": [
+    {
+      "id": "DPT-C-001",
+      "mechanic_id": "DPT-M-001",
+      "slug": "bounded_room_navigation",
+      "inputs": [
+        "current_room: room_id",
+        "choice: exit_slot"
+      ],
+      "outputs": [
+        "new_room: room_id|unchanged",
+        "action_result: accepted|rejected"
+      ],
+      "invariants": [
+        "Reject exits not present in the canonical room graph.",
+        "Rejected movement must not change the actor room."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-002",
+      "mechanic_id": "DPT-M-002",
+      "slug": "travel_cost",
+      "inputs": [
+        "source_room",
+        "selected_exit",
+        "current_minute"
+      ],
+      "outputs": [
+        "arrival_minute"
+      ],
+      "invariants": [
+        "Valid travel uses the exit's canonical positive minute cost.",
+        "Advance through intermediate minutes; reject overflow."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-004",
+      "mechanic_id": "DPT-M-004",
+      "slug": "room_gated_interaction",
+      "inputs": [
+        "actor_room",
+        "required_room",
+        "action"
+      ],
+      "outputs": [
+        "accepted: boolean"
+      ],
+      "invariants": [
+        "An interaction outside its required room must be rejected.",
+        "A rejected interaction cannot change case state."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-005",
+      "mechanic_id": "DPT-M-005",
+      "slug": "monotonic_institutional_clock",
+      "inputs": [
+        "minute",
+        "target_minute"
+      ],
+      "outputs": [
+        "minute",
+        "intermediate_events"
+      ],
+      "invariants": [
+        "The clock never moves backward.",
+        "Each intermediate minute must be visited exactly once."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-007",
+      "mechanic_id": "DPT-M-007",
+      "slug": "case_file_fsm",
+      "inputs": [
+        "case_id",
+        "case_stage",
+        "transition"
+      ],
+      "outputs": [
+        "case_stage",
+        "case_room"
+      ],
+      "invariants": [
+        "Only declared transitions may advance the case.",
+        "A failed transition must not modify the case."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-012",
+      "mechanic_id": "DPT-M-012",
+      "slug": "knowledge_gated_validation",
+      "inputs": [
+        "case_stage",
+        "player_knowledge_bits",
+        "player_action"
+      ],
+      "outputs": [
+        "validated: boolean",
+        "updated_case_state"
+      ],
+      "invariants": [
+        "Explicit action and READY knowledge are required.",
+        "An invalid action must not validate the case."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-018",
+      "mechanic_id": "DPT-M-018",
+      "slug": "view_invariance",
+      "inputs": [
+        "immutable_world",
+        "view_mode"
+      ],
+      "outputs": [
+        "render_frame"
+      ],
+      "invariants": [
+        "Rendering must not mutate authoritative world state.",
+        "Changing only camera modes must not advance institutional time."
+      ],
+      "evidence_level": "c64_source",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-025",
+      "mechanic_id": "DPT-M-025",
+      "slug": "case_scoped_authorization",
+      "inputs": [
+        "actor_permissions",
+        "case_id",
+        "authority_decision"
+      ],
+      "outputs": [
+        "new_permissions"
+      ],
+      "invariants": [
+        "Case-specific authorization does not confer general archive access.",
+        "Granting one case cannot silently grant unrelated case rights."
+      ],
+      "evidence_level": "host_prototype",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-033",
+      "mechanic_id": "DPT-M-033",
+      "slug": "finite_staff_capacity",
+      "inputs": [
+        "department_tasks",
+        "worker_capacity",
+        "simulated_time"
+      ],
+      "outputs": [
+        "queued_tasks",
+        "started_tasks"
+      ],
+      "invariants": [
+        "Concurrent active tasks cannot exceed departmental capacity.",
+        "Tasks awaiting resources incur measurable waiting time."
+      ],
+      "evidence_level": "host_prototype",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-035",
+      "mechanic_id": "DPT-M-035",
+      "slug": "social_memory",
+      "inputs": [
+        "observer_id",
+        "target_id",
+        "action_kind",
+        "trust_delta"
+      ],
+      "outputs": [
+        "trust_state",
+        "social_events"
+      ],
+      "invariants": [
+        "Social memory belongs to a specific observer and target.",
+        "Trust adjustment does not transfer hidden facts by itself."
+      ],
+      "evidence_level": "host_prototype",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    },
+    {
+      "id": "DPT-C-036",
+      "mechanic_id": "DPT-M-036",
+      "slug": "trust_gated_disclosure",
+      "inputs": [
+        "source_actor",
+        "listener_actor",
+        "fact_id",
+        "trust_state"
+      ],
+      "outputs": [
+        "grant_or_deny",
+        "new_listener_knowledge"
+      ],
+      "invariants": [
+        "A denied disclosure cannot alter listener knowledge.",
+        "The revealed fact must have an attributable source."
+      ],
+      "evidence_level": "host_prototype",
+      "status": "documented_contract",
+      "platform_verification": {
+        "godot": "not_run",
+        "host": "not_run",
+        "vice": "not_run",
+        "c64_ultimate": "not_run"
+      }
+    }
+  ]
+}
