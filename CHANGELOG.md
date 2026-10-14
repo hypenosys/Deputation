@@ -27,7 +27,7 @@ Changes in this repository are recorded without treating planned features as shi
 - No claim that simulated ghosts are human playtests, native C64 execution or a complete production gameplay implementation.
 
 ### Institutional art direction and Godot case-desk proof of concept
-- Added a 16-color original host palette with CI contrast verification, original administrative desk concept vector, and three editable institutional SVG wireframes.
+- Added a 16-color original host palette with CI contrast verification, original administrative desk concept vector, three editable institutional SVG wireframes and three exact 40×25 PETSCII text design fixtures.
 - Added original EXP-0042 character copy, actors/motivations and state-conditioned reason-code language.
 - Added a Godot 4.x desk source project with three screen layouts, scoped case actions, persistence of denials, terminal cases and a muteable procedural typewriter/paper/stamp/clock sound system.
 - CI validates copy, SVG and text pairings, boots the Godot scene under a pinned official editor and tests end states and presentation-only toggles in actual GDScript.
