@@ -9,7 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.validate_design import (  # noqa: E402
-    DesignError, load, validate_feedback, validate_denied_fixtures,\n    validate_social, validate_scope,
+    DesignError, load, validate_feedback, validate_denied_fixtures,
+    validate_social, validate_scope,
     validate_prose,
 )
 
@@ -18,7 +19,8 @@ class NarrativeDesignContractTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.feedback = load("data/design/feedback_catalog.json")
-        cls.social = load("data/mechanics/social_dynamics.json")\n        cls.denied_fixtures = load("data/design/denied_actions.v1.json")
+        cls.social = load("data/mechanics/social_dynamics.json")
+        cls.denied_fixtures = load("data/design/denied_actions.v1.json")
         cls.scope = load("data/design/m1_scope.json")
         cls.catalog = load("data/mechanics/extraction.v1.json")
 
