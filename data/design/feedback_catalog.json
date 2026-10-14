@@ -1,0 +1,136 @@
+{
+  "schema": "deputation.feedback_catalog.v1",
+  "case_id": "EXP-0042",
+  "status": "design_plus_reference",
+  "policy": {
+    "denial_mutates_case": false,
+    "denial_mutates_clock": false,
+    "denial_mutates_trust": false,
+    "denial_mutates_knowledge": false,
+    "feedback_is_a_presentation_projection": true,
+    "remaining_minutes": "max(0, 30 - current_minute)",
+    "hidden_fact_leakage": "forbidden"
+  },
+  "denials": [
+    {
+      "action": "request_permit",
+      "code": "MISSING_CASE_BASIS",
+      "actor": "SECRETARY",
+      "visible_reason": "Falta una justificación registrada para EXP-0042.",
+      "next_action": "read_case_file",
+      "status": "reference"
+    },
+    {
+      "action": "request_permit",
+      "code": "PERMISSION_ALREADY_GRANTED",
+      "actor": "SECRETARY",
+      "visible_reason": "La autorización específica ya está concedida; no necesitas duplicarla.",
+      "next_action": "read_archive",
+      "status": "reference"
+    },
+    {
+      "action": "read_archive",
+      "code": "MISSING_CASE_PERMISSION",
+      "actor": "ARCHIVIST",
+      "visible_reason": "No consta autorización ARCHIVE_CASE_0042 para revelar este expediente.",
+      "next_action": "request_permit",
+      "status": "reference"
+    },
+    {
+      "action": "read_archive",
+      "code": "INVALID_CASE_STAGE",
+      "actor": "ARCHIVIST",
+      "visible_reason": "La fase actual del expediente no admite esta lectura.",
+      "next_action": "inspect_case_status",
+      "status": "reference"
+    },
+    {
+      "action": "validate_case",
+      "code": "INVALID_CASE_STAGE",
+      "actor": "CASE_OFFICE",
+      "visible_reason": "El expediente aún no ha alcanzado la revisión de archivo.",
+      "next_action": "read_archive",
+      "status": "reference"
+    },
+    {
+      "action": "validate_case",
+      "code": "MISSING_HISTORY",
+      "actor": "CASE_OFFICE",
+      "visible_reason": "Falta evidencia de archivo con procedencia acreditada.",
+      "next_action": "read_archive",
+      "status": "reference"
+    },
+    {
+      "action": "validate_case",
+      "code": "MISSING_READY",
+      "actor": "CASE_OFFICE",
+      "visible_reason": "La señal de preparación del expediente todavía no consta.",
+      "next_action": "await_authoritative_ready",
+      "status": "reference"
+    },
+    {
+      "action": "*",
+      "code": "WRONG_ROOM",
+      "actor": "SYSTEM",
+      "visible_reason": "Esta acción requiere otra estancia; la ubicación actual no permite tramitarla.",
+      "next_action": "travel_to_required_room",
+      "status": "reference"
+    },
+    {
+      "action": "*",
+      "code": "DEADLINE_EXPIRED",
+      "actor": "SYSTEM",
+      "visible_reason": "La ventana de validación ha vencido. La revisión posterior exige otro procedimiento.",
+      "next_action": "review_outcome",
+      "status": "reference"
+    },
+    {
+      "action": "*",
+      "code": "ACTOR_NOT_AUTHORIZED",
+      "actor": "SYSTEM",
+      "visible_reason": "El interlocutor elegido no tiene competencia para resolver esta solicitud.",
+      "next_action": "find_responsible_actor",
+      "status": "reference"
+    },
+    {
+      "action": "*",
+      "code": "ACTOR_UNAVAILABLE",
+      "actor": "SYSTEM",
+      "visible_reason": "La persona competente no está atendiendo en este momento.",
+      "next_action": "consult_schedule",
+      "status": "reference"
+    },
+    {
+      "action": "move",
+      "code": "INVALID_EXIT",
+      "actor": "SYSTEM",
+      "visible_reason": "No existe una conexión entre estas estancias.",
+      "next_action": "choose_existing_exit",
+      "status": "planned_M1"
+    },
+    {
+      "action": "request_permit",
+      "code": "SERVICE_PENDING",
+      "actor": "REGISTRY_CLERK",
+      "visible_reason": "La solicitud está en espera por servicio ocupado.",
+      "next_action": "consult_queue",
+      "status": "planned_M2"
+    },
+    {
+      "action": "ask_for_hint",
+      "code": "TRUST_TOO_LOW",
+      "actor": "ARCHIVIST",
+      "visible_reason": "El funcionario no comparte información adicional sin referencias contrastables.",
+      "next_action": "present_verified_evidence",
+      "status": "planned_M2"
+    },
+    {
+      "action": "read_archive",
+      "code": "INCIDENT_BLOCKING",
+      "actor": "REGISTRY_CLERK",
+      "visible_reason": "La incidencia impide consultar el índice; se conserva la autorización.",
+      "next_action": "consult_incident_status",
+      "status": "planned_M2"
+    }
+  ]
+}
