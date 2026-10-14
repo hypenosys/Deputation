@@ -10,7 +10,7 @@ El MOS 6510 dispone de espacio de direcciones de **64 KiB**, pero no son 64 KiB 
 
 | Segmento de datos de juego | Diseño de codificación | Presupuesto provisional |
 | --- | --- | ---: |
-| Reloj, deadline, sala, fase | \`uint16_t\` + bytes | 6–10 B |
+| Reloj, deadline, sala, fase | `uint16_t` + bytes | 6–10 B |
 | Bits de conocimiento, autorización, objetivos | Máscaras de bits | 6–16 B |
 | Actores/agenda mínima (si M1 lo requiere) | IDs compactos, sin strings | 8–32 B |
 | Confianza (NO integrada en M1) | 5 bytes solo reserva futura | 0 B M1 |
@@ -29,7 +29,7 @@ Los valores superiores no son suma de bloques certificados; son límites orienta
 | Charset personalizado | 256 glifos × 8 B = 2048 B | Glyphs de interfaz y escenografía deben compartir presupuesto |
 | Paleta del C64 | 16 colores | Contraste antes que gradientes; revisar legibilidad real |
 
-**Cuidado:** pantalla, color y charset son **requisitos de visualización**, no una estimación de «estado social». El color RAM reside en la región I/O \`$D800–$DBE7\`; no contarlo simplemente como un segundo buffer de CPU RAM sin justificar copias. Si se mantiene framebuffer oculto o doble buffer, medir y sumar por separado. Cambios entre raycast/wireframe/isométrico no deben tocar bits de conocimiento.
+**Cuidado:** pantalla, color y charset son **requisitos de visualización**, no una estimación de «estado social». El color RAM reside en la región I/O `$D800–$DBE7`; no contarlo simplemente como un segundo buffer de CPU RAM sin justificar copias. Si se mantiene framebuffer oculto o doble buffer, medir y sumar por separado. Cambios entre raycast/wireframe/isométrico no deben tocar bits de conocimiento.
 
 ## 2. Presupuesto de ciclos por cuadro
 
