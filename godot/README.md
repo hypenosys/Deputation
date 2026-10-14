@@ -15,6 +15,6 @@ The desk shows three **zero-cost** layouts: expediente abierto, bandeja de tarea
 
 **Source QA vs runtime QA:** Python CI validates palette, story content and reference model fixtures. Godot 4 binary is **not currently provisioned in the existing CI**; therefore we do not claim the scene was launched, that glyphs fit every device or that Godot and Python are bit-identical. Confirm `--headless` syntax and inspect the scene manually before merging for production. A separate port/equivalence project should compare step-by-step state hashes and transitions with the Python oracle before promotion.
 
-**Audio:** event IDs appear in the right-hand pane but no sound is played in this first scaffold. See [audio cues](../docs/design/UI_CONVENTIONS.md). This is deliberate: do not substitute unlicensed loops or assert a sound asset exists.
+**Audio:** `godot/procedural_audio.gd` now synthesizes original low-volume stamp, paper, denial and ticking cues in memory; no sound file or license is imported. The ambient tick is based only on presentation-time and has an independent **SONIDO** toggle. See [audio cues](../docs/design/UI_CONVENTIONS.md). The acoustic result needs listening QA on a real device; headless verifies safe execution, not perceptual quality.
 
 **Target C64:** the 1280×720 Godot layout is not a 40×25 PETSCII screen. Refer to the original [wireframes](../docs/design/wireframes/) and [C64 constraints](../docs/CONSTRAINTS.md); implement and test a dedicated bank/glyph-aware renderer before claiming native portability.
