@@ -49,3 +49,7 @@ A future Godot front end may use GDScript nodes to display the world; a separate
 3. Three camera modes do not modify authoritative simulation state.
 4. Runtime platform claims are backed by the *exact artifact* and reproducible logs.
 5. Only then may "implemented" or "validated" replace the research statuses.
+
+## EXP-0042 playable specification, separate from runtime
+
+The [authored case](design/EXP-0042_case_arc.md) supplies motive, stakeholders and a 30-minute diegetic window. The [moment-to-moment loop](design/moment_to_moment.md) defines a 2–3 **real-minute** repeated player cycle. The [15-mechanic M1 selection](design/M1_scope.md) limits the production target. [Denial feedback](design/denial_feedback.md) is a pure view of rejection codes; [trust scheduling](design/social_dynamics.md) is an M2-only proposal and **cannot** grant legal authority. The [reference evaluator](../tools/authority_reference.py) and [negative tests](../tests/test_denied_permit_idempotence.py) make denied-permission idempotence executable in Python only. The full game remains unimplemented here.
