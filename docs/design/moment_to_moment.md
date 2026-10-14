@@ -4,6 +4,6 @@
 
 El jugador abre la carátula del expediente y ve tres cosas: objetivo verificable, autorización pendiente y minutos disponibles. Distingue hechos, testimonios y conjeturas. Elige desplazarse desde Courtyard hasta Registry, pagando los minutos que marque el arco de navegación. Solicita acceso acotado en Secretaría. Si falta una justificación, la solicitud se **rechaza sin alterar el estado** y la pantalla identifica al responsable, motivo, tiempo restante y siguiente acción viable. Corrige la petición y obtiene permiso legítimo.
 
-Luego llega a Archive, busca al archivero y consulta la historia documentada. Obtiene información con procedencia explícita. Regresa a Registry, contrasta `HISTORY` con `READY` y pulsa **validar**. El núcleo comprueba habitación, fase, evidencia, competencia y plazo. Si falla, hay fricción explicada; si pasa, registra una transición con resultado reproducible.
+Luego llega a Archive y consulta la historia documental bajo custodia del archivero. Obtiene información con procedencia explícita. Regresa a Registry, contrasta `HISTORY` con `READY` y pulsa **validar**. El núcleo comprueba la estancia Archive, fase, evidencia, competencia y plazo. Si falla, hay fricción explicada; si pasa, registra una transición con resultado reproducible.
 
 El jugador puede cambiar libremente entre cámaras: esto **nunca gasta minutos**. La presión nace de las acciones con coste, las agendas y los datos incompletos. Los rechazos deben ser explicables sin revelar secretos.
