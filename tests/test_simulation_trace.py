@@ -109,6 +109,26 @@ class GameGrammarTraceTests(unittest.TestCase):
         self.assertEqual(result["remaining_minutes"], 15)
         self.assertEqual(before, state_sha(state))
 
+    def test_success_is_terminal_for_world_actions(self):
+        state = CaseState(room="ARCHIVE", minute=28, stage="validated",
+                          permissions=frozenset({"ARCHIVE_CASE_0042"}))
+        before = state_sha(state)
+        after, code = perform(state, {"type": "move", "target": "REGISTRY"}, self.world)
+        self.assertIs(after, state)
+        self.assertEqual(code, "CASE_ALREADY_VALIDATED")
+        self.assertEqual(before, state_sha(after))
+        info = feedback(code, "move", state.minute, self.feedback)
+        self.assertTrue(info["next_action"])
+        self.assertEqual(perform(state, {"type": "inspect_case_status"}, self.world),
+                         (state, "STATUS_VIEWED"))
+
+    def test_expiry_is_terminal_for_world_actions(self):
+        state = CaseState(room="ARCHIVE", minute=30, stage="archive_review")
+        after, code = perform(state, {"type": "move", "target": "REGISTRY"}, self.world)
+        self.assertIs(after, state)
+        self.assertEqual(code, "DEADLINE_EXPIRED")
+        self.assertEqual(after.minute, 30)
+
     def test_invalid_action_refused_without_fabrication(self):
         state = CaseState()
         with self.assertRaisesRegex(TraceError, "unknown action"):
