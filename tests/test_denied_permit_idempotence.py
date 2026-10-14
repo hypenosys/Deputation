@@ -74,15 +74,15 @@ class DeniedPermitIdempotenceTests(unittest.TestCase):
         self.assert_denied_unchanged(state, "read_archive", "INVALID_CASE_STAGE")
 
     def test_missing_ready_cannot_validate(self):
-        state = CaseState(stage="archive_review", knowledge=frozenset({"HISTORY"}))
+        state = CaseState(room="ARCHIVE", stage="archive_review", knowledge=frozenset({"HISTORY"}))
         self.assert_denied_unchanged(state, "validate_case", "MISSING_READY")
 
     def test_missing_history_cannot_validate(self):
-        state = CaseState(stage="archive_review", knowledge=frozenset({"READY"}))
+        state = CaseState(room="ARCHIVE", stage="archive_review", knowledge=frozenset({"READY"}))
         self.assert_denied_unchanged(state, "validate_case", "MISSING_HISTORY")
 
     def test_complete_reference_happy_path(self):
-        start = CaseState(minute=25, knowledge=frozenset({"CASE_BASIS", "READY"}))
+        start = CaseState(minute=25, stage="archive_review",\n                          knowledge=frozenset({"CASE_BASIS", "READY"}))
         granted = evaluate(start, "request_permit")
         self.assertTrue(granted.accepted)
         self.assertEqual(granted.state.minute, 26)
@@ -90,13 +90,13 @@ class DeniedPermitIdempotenceTests(unittest.TestCase):
         self.assertTrue(archived.accepted)
         self.assertEqual(archived.state.stage, "archive_review")
         self.assertIn("HISTORY", archived.state.knowledge)
-        finished = evaluate(replace(archived.state, room="REGISTRY"), "validate_case")
+        finished = evaluate(archived.state, "validate_case")
         self.assertTrue(finished.accepted)
         self.assertEqual(finished.state.stage, "validated")
         self.assertEqual(finished.state.minute, 28)
 
     def test_cannot_validate_after_deadline(self):
-        state = CaseState(stage="archive_review", minute=31,
+        state = CaseState(room="ARCHIVE", stage="archive_review", minute=31,
                           knowledge=frozenset({"HISTORY", "READY"}))
         self.assert_denied_unchanged(state, "validate_case", "DEADLINE_EXPIRED")
 
