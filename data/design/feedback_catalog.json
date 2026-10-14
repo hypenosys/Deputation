@@ -131,6 +131,14 @@
       "visible_reason": "La incidencia impide consultar el índice; se conserva la autorización.",
       "next_action": "consult_incident_status",
       "status": "planned_M2"
+    },
+    {
+      "action": "*",
+      "code": "CASE_ALREADY_VALIDATED",
+      "actor": "SYSTEM",
+      "visible_reason": "El expediente ya fue validado y cerrado. Solo puedes consultar su resultado.",
+      "next_action": "inspect_case_status",
+      "status": "planned_M1"
     }
   ]
 }
