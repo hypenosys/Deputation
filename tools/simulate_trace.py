@@ -9,12 +9,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from dataclasses import asdict, replace
 from pathlib import Path
 
-from tools.authority_reference import CaseState, evaluate, DEADLINE_MINUTE
-
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from tools.authority_reference import CaseState, evaluate, DEADLINE_MINUTE  # noqa: E402
 WORLD = ROOT / "data/world/vertical_slice.v1.json"
 FEEDBACK = ROOT / "data/design/feedback_catalog.json"
 DEFAULT_TRACE = ROOT / "data/world/simulation_trace.json"
@@ -177,9 +179,9 @@ def replay(trace: dict, world: dict, catalog: dict) -> dict:
                 raise TraceError(f"{cid} step {i}: expected {action.get('expect_code')}, got {code}")
             if state.minute != action.get("expect_minute"):
                 raise TraceError(f"{cid} step {i}: expected minute {action.get('expect_minute')}, got {state.minute}")
-            if (code in {x["code"] for x in catalog["denials"]}
-                    and pre != post and state is previous):
-                raise TraceError(f"{cid} step {i}: denial hash mutated")
+            if code in {x["code"] for x in catalog["denials"]} and (
+                    pre != post or state is not previous):
+                raise TraceError(f"{cid} step {i}: denial mutated authoritative state")
             observations.append({
                 "step": i, "action": action["type"], "target": action.get("target"),
                 "code": code, "minute": state.minute, "room": state.room,
