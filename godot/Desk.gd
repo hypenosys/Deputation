@@ -180,7 +180,7 @@ func _redraw() -> void:
 		_render_administration(middle)
 
 	var response_column: VBoxContainer = _stack(12)
-	var response_panel: PanelContainer = _block(response_column, "paper_aged", "slate")
+	var response_panel: PanelContainer = _block(response_column, "paper", "slate")
 	response_panel.custom_minimum_size = Vector2(320, 0)
 	response_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	body.add_child(response_panel)
