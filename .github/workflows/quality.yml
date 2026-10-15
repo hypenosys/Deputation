@@ -17,5 +17,31 @@ jobs:
         run: python tools/validate_mechanics.py
       - name: Validate narrative design and denial contracts
         run: python tools/validate_design.py
+      - name: Replay six-cycle winning ghost step by step
+        run: python -m tools.simulate_trace --trace data/world/simulation_trace.json
+      - name: Replay expired-case counterfactual
+        run: python -m tools.simulate_trace --trace data/world/simulation_trace_failure.json
+      - name: Validate original visual language and mockups
+        run: python tools/validate_visual.py
       - name: Run regression suite
         run: python -m unittest discover -s tests -v
+
+  godot_desk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch pinned official Godot 4.6.3 Linux editor
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 --silent --show-error \
+            "https://github.com/godotengine/godot/releases/download/4.6.3-stable/Godot_v4.6.3-stable_linux.x86_64.zip" \
+            -o godot.zip
+          echo "d0bc2113065e481c9c2c2b2c37daa4e8be3fe9e27f0ab9ab0b6096e9a37907f3  godot.zip" | sha256sum --check
+          unzip -q godot.zip
+          chmod +x Godot_v4.6.3-stable_linux.x86_64
+      - name: Import and parse original GDScript scene
+        run: ./Godot_v4.6.3-stable_linux.x86_64 --headless --path . --editor --quit
+      - name: Launch interactive desk headless for 5 frames
+        run: ./Godot_v4.6.3-stable_linux.x86_64 --headless --path . --quit-after 5
+      - name: Run actual Godot GDScript game logic and UI regression
+        run: ./Godot_v4.6.3-stable_linux.x86_64 --headless --path . --script res://godot/test_case.gd

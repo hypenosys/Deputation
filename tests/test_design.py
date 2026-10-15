@@ -25,7 +25,7 @@ class NarrativeDesignContractTests(unittest.TestCase):
         cls.catalog = load("data/mechanics/extraction.v1.json")
 
     def test_feedback_matrix_complete(self):
-        self.assertEqual(validate_feedback(self.feedback), 15)
+        self.assertEqual(validate_feedback(self.feedback), 16)
 
     def test_denials_never_advance_clock(self):
         data = copy.deepcopy(self.feedback)

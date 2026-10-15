@@ -1,0 +1,192 @@
+{
+  "schema": "deputation.simulation_trace.v1",
+  "name": "EXP-0042 / winning paper-playtest ghost",
+  "case_id": "EXP-0042",
+  "model": "Host oracle: 30 simulated minutes, 3 canonical rooms, m10 archive_review, m15 REVIEW, m27 READY; legal authority is case-scoped",
+  "unit": "simulation minutes, not real playtime",
+  "scope": "6 authored interaction cycles, not C64 behavior certification",
+  "cycles": [
+    {
+      "id": "C01",
+      "intent": "Read a case, hit a refusal, establish standing",
+      "actions": [
+        {
+          "type": "move",
+          "target": "REGISTRY",
+          "expect_code": "MOVED",
+          "expect_minute": 2
+        },
+        {
+          "type": "request_permit",
+          "expect_code": "MISSING_CASE_BASIS",
+          "expect_minute": 2
+        },
+        {
+          "type": "read_case_file",
+          "expect_code": "CASE_FILE_READ",
+          "expect_minute": 3
+        },
+        {
+          "type": "request_permit",
+          "expect_code": "PERMIT_GRANTED",
+          "expect_minute": 4
+        }
+      ],
+      "expect_end": {
+        "minute": 4,
+        "room": "REGISTRY",
+        "stage": "registered",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "C02",
+      "intent": "Discover premature access and wait until institutional review",
+      "actions": [
+        {
+          "type": "move",
+          "target": "ARCHIVE",
+          "expect_code": "MOVED",
+          "expect_minute": 7
+        },
+        {
+          "type": "read_archive",
+          "expect_code": "INVALID_CASE_STAGE",
+          "expect_minute": 7
+        },
+        {
+          "type": "wait",
+          "minutes": 3,
+          "expect_code": "WAITED",
+          "expect_minute": 10
+        },
+        {
+          "type": "read_archive",
+          "expect_code": "ARCHIVE_READ",
+          "expect_minute": 11
+        }
+      ],
+      "expect_end": {
+        "minute": 11,
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "C03",
+      "intent": "Use the room loop to see the cost of detours, challenge early validation",
+      "actions": [
+        {
+          "type": "move",
+          "target": "REGISTRY",
+          "expect_code": "MOVED",
+          "expect_minute": 14
+        },
+        {
+          "type": "inspect_case_status",
+          "expect_code": "STATUS_VIEWED",
+          "expect_minute": 14
+        },
+        {
+          "type": "wait",
+          "minutes": 1,
+          "expect_code": "WAITED",
+          "expect_minute": 15
+        },
+        {
+          "type": "move",
+          "target": "ARCHIVE",
+          "expect_code": "MOVED",
+          "expect_minute": 18
+        },
+        {
+          "type": "validate_case",
+          "expect_code": "MISSING_READY",
+          "expect_minute": 18
+        }
+      ],
+      "expect_end": {
+        "minute": 18,
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "C04",
+      "intent": "A reversible but costly second detour, including wrong-room denial",
+      "actions": [
+        {
+          "type": "move",
+          "target": "REGISTRY",
+          "expect_code": "MOVED",
+          "expect_minute": 21
+        },
+        {
+          "type": "read_archive",
+          "expect_code": "WRONG_ROOM",
+          "expect_minute": 21
+        },
+        {
+          "type": "move",
+          "target": "ARCHIVE",
+          "expect_code": "MOVED",
+          "expect_minute": 24
+        }
+      ],
+      "expect_end": {
+        "minute": 24,
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "C05",
+      "intent": "Interpret a failed validation and wait explicitly for credible readiness",
+      "actions": [
+        {
+          "type": "validate_case",
+          "expect_code": "MISSING_READY",
+          "expect_minute": 24
+        },
+        {
+          "type": "wait",
+          "minutes": 3,
+          "expect_code": "WAITED",
+          "expect_minute": 27
+        },
+        {
+          "type": "inspect_case_status",
+          "expect_code": "STATUS_VIEWED",
+          "expect_minute": 27
+        }
+      ],
+      "expect_end": {
+        "minute": 27,
+        "room": "ARCHIVE",
+        "stage": "archive_review",
+        "outcome": "ongoing"
+      }
+    },
+    {
+      "id": "C06",
+      "intent": "Validate the contradiction and close the case within the 30-minute window",
+      "actions": [
+        {
+          "type": "validate_case",
+          "expect_code": "CASE_VALIDATED",
+          "expect_minute": 28
+        }
+      ],
+      "expect_end": {
+        "minute": 28,
+        "room": "ARCHIVE",
+        "stage": "validated",
+        "outcome": "validated"
+      }
+    }
+  ],
+  "expect_outcome": "validated"
+}

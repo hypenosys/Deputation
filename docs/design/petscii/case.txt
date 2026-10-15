@@ -1,0 +1,25 @@
++--------------------------------------+
+|THE DEPUTATION       EXP-0042         |
+|CLOCK SIM: 07/30        LEFT: 23      |
+|ROOM: ARCHIVE  STAGE: REGISTERED      |
+|--------------------------------------|
+|FORM 42-B  /  CASE RECORD             |
+|INCOMING ENTRY: VERIFIED              |
+|                                      |
+|TWO DATES FAIL TO MATCH.              |
+|THE DISCREPANCY EXISTS.               |
+|ITS MEANING IS NOT YET ADMITTED.      |
+|                                      |
+|KNOWN: CASE_BASIS                     |
+|PERMIT: ARCHIVE_CASE_0042             |
+|ARCHIVE EVIDENCE: NOT AVAILABLE       |
+|                                      |
+|[?] NEXT: AWAIT REVIEW STAGE          |
+|[ ] CHECK FILE                        |
+|[ ] VALIDATE (NOT READY)              |
+|--------------------------------------|
+|DENIED: INVALID_CASE_STAGE            |
+|BY: ARCHIVIST                         |
+|WHY: CASE NOT YET UNDER REVIEW        |
+|NEXT: CHECK STAGE / WAIT              |
++--------------------------------------+

@@ -1,0 +1,95 @@
+{
+  "schema": "deputation.visual_palette.v1",
+  "status": "authored_host_palette_not_hardware_colorimetry",
+  "max_colors": 16,
+  "colors": {
+    "carbon": "#151B1C",
+    "coal": "#222C2C",
+    "slate": "#354243",
+    "paper": "#EEE5CE",
+    "paper_aged": "#D8CAA9",
+    "ink": "#172527",
+    "muted": "#55615A",
+    "green": "#1D6C58",
+    "red": "#8B2734",
+    "amber": "#775211",
+    "stamp": "#602936",
+    "pearl": "#F8F2E2",
+    "pale_green": "#B7DCC6",
+    "pale_yellow": "#F2D889",
+    "pale_red": "#F5B9B1",
+    "blueprint": "#243E58"
+  },
+  "semantic_roles": {
+    "background": "carbon",
+    "cabinet": "coal",
+    "paper": "paper",
+    "paper_shadow": "paper_aged",
+    "text_on_paper": "ink",
+    "secondary_on_paper": "muted",
+    "success_on_paper": "green",
+    "danger_on_paper": "red",
+    "warning_on_paper": "amber",
+    "stamp_on_paper": "stamp",
+    "text_on_dark": "pearl",
+    "secondary_on_dark": "paper_aged",
+    "success_on_dark": "pale_green",
+    "warning_on_dark": "pale_yellow",
+    "danger_on_dark": "pale_red"
+  },
+  "text_pairings": [
+    [
+      "ink",
+      "paper"
+    ],
+    [
+      "ink",
+      "paper_aged"
+    ],
+    [
+      "muted",
+      "paper"
+    ],
+    [
+      "green",
+      "paper"
+    ],
+    [
+      "red",
+      "paper"
+    ],
+    [
+      "amber",
+      "paper"
+    ],
+    [
+      "stamp",
+      "paper"
+    ],
+    [
+      "pearl",
+      "carbon"
+    ],
+    [
+      "paper_aged",
+      "coal"
+    ],
+    [
+      "pale_green",
+      "coal"
+    ],
+    [
+      "pale_yellow",
+      "coal"
+    ],
+    [
+      "pale_red",
+      "coal"
+    ]
+  ],
+  "notes": [
+    "Hex colors for host UI/mockups, not an exact VIC-II palette. C64 port must quantize to calibrated hardware values.",
+    "Text labels always accompany status colors. Do not use stamp red to carry semantics alone.",
+    "Godot prototype uses default built-in font; no third-party font redistribution."
+  ]
+}
