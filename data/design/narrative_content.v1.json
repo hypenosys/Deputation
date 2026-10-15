@@ -1,0 +1,147 @@
+{
+  "schema": "deputation.narrative_content.v1",
+  "case_id": "EXP-0042",
+  "status": "original_fiction_content_not_npc_simulation",
+  "premise": "Dos asientos oficiales se contradicen. Obtenga autorización específica para consultar la prueba de Archivo y valide la discrepancia antes del cierre.",
+  "case_heading": "EXPEDIENTE EXP-0042 · REVISIÓN EXTRAORDINARIA",
+  "case_body": "ENTRADA RECIBIDA / ASIENTO VÁLIDO\n\nMotivo de revisión: dos fechas de recepción no coinciden. La discrepancia consta; su significado, no.\n\nLa documentación bajo custodia de Archivo no puede consultarse sin autorización referida a este expediente.",
+  "archive_body": "TESTIMONIO DE ARCHIVO · HISTORIA\n\nLa hoja anterior dice que llegó el día 12. Esta dice que no llegó nunca. Ambas llevan sello.\n\nLa constatación de una contradicción no equivale automáticamente a su validación.",
+  "room_descriptions": {
+    "COURTYARD": "Patio sin reloj visible. Los avisos indican una sola dirección: Registro.",
+    "REGISTRY": "Un mostrador separa la carátula de quien puede autorizar su examen. Hay dos sellos, ambos gastados.",
+    "ARCHIVE": "Fichas numeradas y estantes de metal. El archivo conserva más de lo que puede mostrar."
+  },
+  "actors": [
+    {
+      "id": "IRIA",
+      "name": "Iria Valls",
+      "role": "Investigadora interina",
+      "motivation": "Acreditar la discrepancia"
+    },
+    {
+      "id": "SECRETARY",
+      "name": "Elena Robles",
+      "role": "Secretaría",
+      "motivation": "No perder la trazabilidad de una autorización"
+    },
+    {
+      "id": "ARCHIVIST",
+      "name": "Marcel Vidal",
+      "role": "Archivero",
+      "motivation": "Conservar la cadena de custodia"
+    },
+    {
+      "id": "REGISTRY_CLERK",
+      "name": "Núria Soler",
+      "role": "Registro",
+      "motivation": "Procesar lo que el sistema aún permite"
+    },
+    {
+      "id": "CASE_OFFICE",
+      "name": "Damià Ferrer",
+      "role": "Supervisor",
+      "motivation": "Evitar un cierre sin respaldo documental"
+    }
+  ],
+  "results": {
+    "BOOT": {
+      "actor": "ARCHIVO CENTRAL",
+      "label": "SIN REGISTRAR",
+      "message": "Expediente EXP-0042. El plazo de revisión está abierto. Localice Registro.",
+      "next": "Ir a Registro",
+      "cue": "room_tone"
+    },
+    "MOVED": {
+      "actor": "SISTEMA",
+      "label": "DESPLAZAMIENTO",
+      "message": "Desplazamiento registrado y coste temporal aplicado.",
+      "next": "Consultar expediente o interlocutor",
+      "cue": "footstep_paper"
+    },
+    "WAITED": {
+      "actor": "RELOJ",
+      "label": "TIEMPO TRANSCURRIDO",
+      "message": "Se han ejecutado los hitos intermedios del expediente.",
+      "next": "Consultar estado y próximos requisitos",
+      "cue": "clock_tick"
+    },
+    "CASE_FILE_READ": {
+      "actor": "REGISTRO",
+      "label": "CARÁTULA LEÍDA",
+      "message": "Motivo del expediente registrado como conocimiento del jugador.",
+      "next": "Solicitar permiso acotado a EXP-0042",
+      "cue": "paper"
+    },
+    "PERMIT_GRANTED": {
+      "actor": "ELENA ROBLES · SECRETARÍA",
+      "label": "AUTORIZADO",
+      "message": "Autorizado para EXP-0042. Este sello no abre ningún otro archivo.",
+      "next": "Ir a Archivo y consultar cuando la revisión esté abierta",
+      "cue": "stamp"
+    },
+    "ARCHIVE_READ": {
+      "actor": "MARCEL VIDAL · ARCHIVO",
+      "label": "HECHO REGISTRADO",
+      "message": "Dos hojas contradicen su fecha de recepción. HISTORY adquirido con procedencia.",
+      "next": "Esperar READY y validar desde Archivo",
+      "cue": "paper"
+    },
+    "CASE_VALIDATED": {
+      "actor": "OFICINA DEL EXPEDIENTE",
+      "label": "VALIDADO",
+      "message": "Discrepancia acreditada. El expediente permanece abierto a las consecuencias.",
+      "next": "Consultar el resultado; expediente cerrado para acciones",
+      "cue": "stamp_double"
+    },
+    "STATUS_VIEWED": {
+      "actor": "SISTEMA",
+      "label": "CONSULTA",
+      "message": "La consulta no altera el estado institucional ni su reloj.",
+      "next": "Seleccionar una acción con requisitos conocidos",
+      "cue": "silent"
+    },
+    "FILE_ALREADY_READ": {
+      "actor": "REGISTRO",
+      "label": "YA CONSULTADO",
+      "message": "La carátula ya consta en la investigación.",
+      "next": "Solicitar autorización del expediente",
+      "cue": "silent"
+    },
+    "CASE_ALREADY_VALIDATED": {
+      "actor": "SISTEMA",
+      "label": "EXPEDIENTE CERRADO",
+      "message": "No se admiten nuevas acciones sobre un expediente validado.",
+      "next": "Consultar resultado",
+      "cue": "silent"
+    },
+    "INVALID_EXIT": {
+      "actor": "SISTEMA",
+      "label": "SIN SALIDA",
+      "message": "La ruta solicitada no existe en el mapa de salas.",
+      "next": "Elegir una salida conectada",
+      "cue": "denial"
+    },
+    "READ_ONLY": {
+      "actor": "SISTEMA",
+      "label": "ESTADO",
+      "message": "Estado disponible para inspección sin coste.",
+      "next": "Continuar",
+      "cue": "silent"
+    },
+    "DEADLINE_EXPIRED": {
+      "actor": "RELOJ INSTITUCIONAL",
+      "label": "PLAZO VENCIDO",
+      "message": "Plazo vencido. El hecho no cambia. Su admisibilidad, sí.",
+      "next": "Consultar resultado; sin acciones adicionales",
+      "cue": "clock_stop"
+    }
+  },
+  "audio_events": {
+    "read_case_file": "paper",
+    "request_permit_success": "stamp",
+    "denial": "denial",
+    "wait": "clock_tick",
+    "validate_case": "stamp_double",
+    "case_expired": "clock_stop"
+  }
+}
